@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$titulo = get_field( 'newsletter_titulo' ) ?: 'Recibe un devocional cada semana';
+$titulo = berea_home_get_field( 'newsletter_titulo' ) ?: 'Recibe un devocional cada semana';
 ?>
 <section class="libreria-newsletter">
 	<h2 class="libreria-section__titulo"><?php echo esc_html( $titulo ); ?></h2>

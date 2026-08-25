@@ -23,9 +23,9 @@ if ( ! $query->have_posts() ) {
 	<h2 class="libreria-section__titulo">Lo que dicen nuestros lectores</h2>
 	<div class="libreria-testimonios__grid">
 		<?php while ( $query->have_posts() ) : $query->the_post();
-			$texto  = get_field( 'testimonio_texto' );
-			$autor  = get_field( 'testimonio_autor' );
-			$rating = (int) get_field( 'testimonio_rating' );
+			$texto  = berea_home_get_field( 'testimonio_texto' );
+			$autor  = berea_home_get_field( 'testimonio_autor' );
+			$rating = (int) berea_home_get_field( 'testimonio_rating' );
 			?>
 			<blockquote class="libreria-testimonios__item">
 				<p>&ldquo;<?php echo esc_html( $texto ); ?>&rdquo;</p>

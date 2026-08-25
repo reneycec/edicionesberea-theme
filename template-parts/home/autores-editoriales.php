@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$editoriales = get_field( 'autores_editoriales' );
+$editoriales = berea_home_get_field( 'autores_editoriales' );
 
 if ( empty( $editoriales ) ) {
 	return;
@@ -23,7 +23,7 @@ if ( empty( $editoriales ) ) {
 	<h2 class="libreria-section__titulo">Autores y editoriales destacadas</h2>
 	<div class="libreria-editoriales__grid">
 		<?php foreach ( $editoriales as $editorial ) :
-			$logo = get_field( 'editorial_logo', $editorial );
+			$logo = berea_home_get_field( 'editorial_logo', $editorial );
 			?>
 			<a class="libreria-editoriales__item" href="<?php echo esc_url( get_term_link( $editorial ) ); ?>">
 				<?php if ( $logo ) : ?>

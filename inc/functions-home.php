@@ -13,6 +13,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+function berea_home_get_field( $field_name, $post_id = false ) {
+	if ( ! function_exists( 'get_field' ) ) {
+		return null;
+	}
+
+	return get_field( $field_name, $post_id );
+}
+
 /* -------------------------------------------------------------------------
  * 1. ASSETS DEL HOME
  * -----------------------------------------------------------------------*/

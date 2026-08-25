@@ -9,16 +9,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $items = array(
 	array(
-		'icono' => get_field( 'confianza_1_icono' ) ?: 'dashicons-car',
-		'texto' => get_field( 'confianza_1_texto' ) ?: 'Envío a todo el país',
+		'icono' => berea_home_get_field( 'confianza_1_icono' ) ?: 'dashicons-car',
+		'texto' => berea_home_get_field( 'confianza_1_texto' ) ?: 'Envío a todo el país',
 	),
 	array(
-		'icono' => get_field( 'confianza_2_icono' ) ?: 'dashicons-lock',
-		'texto' => get_field( 'confianza_2_texto' ) ?: 'Pago seguro con Stripe y PayPal',
+		'icono' => berea_home_get_field( 'confianza_2_icono' ) ?: 'dashicons-lock',
+		'texto' => berea_home_get_field( 'confianza_2_texto' ) ?: 'Pago seguro con Stripe y PayPal',
 	),
 	array(
-		'icono' => get_field( 'confianza_3_icono' ) ?: 'dashicons-update',
-		'texto' => get_field( 'confianza_3_texto' ) ?: 'Devoluciones sencillas',
+		'icono' => berea_home_get_field( 'confianza_3_icono' ) ?: 'dashicons-update',
+		'texto' => berea_home_get_field( 'confianza_3_texto' ) ?: 'Devoluciones sencillas',
 	),
 );
 ?>
