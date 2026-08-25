@@ -13,6 +13,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+if ( ! function_exists( 'wc_get_products' ) || ! function_exists( 'wc_get_template_part' ) ) {
+	return;
+}
+
 $productos = wc_get_products( array(
 	'status'   => 'publish',
 	'limit'    => 8,

@@ -26,7 +26,7 @@ add_action( 'wp_enqueue_scripts', function () {
 	wp_enqueue_style(
 		'libreria-home',
 		get_stylesheet_directory_uri() . '/assets/css/home.css',
-		array( 'storefront-styles' ),
+		array( 'storefront-style' ),
 		wp_get_theme()->get( 'Version' )
 	);
 

@@ -48,6 +48,12 @@
 	margin-bottom: 24px;
 }
 
+.libreria-hero__buscador {
+	max-width: 560px;
+	margin: 24px auto 0;
+	text-align: left;
+}
+
 /* Categorías */
 .libreria-categorias__grid {
 	display: grid;
