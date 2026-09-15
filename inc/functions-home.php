@@ -341,3 +341,44 @@ function libreria_handle_newsletter_subscribe(): void {
 
 	wp_send_json_success( array( 'message' => '¡Listo! Revisa tu correo la próxima semana.' ) );
 }
+
+/* -------------------------------------------------------------------------
+ * 6. MENÚ STICKY (header fijo al hacer scroll)
+ * Se hace con clase JS en vez de position:fixed puro para compensar la
+ * altura del header con padding en el body y evitar el "salto" de contenido.
+ * -----------------------------------------------------------------------*/
+add_action( 'wp_enqueue_scripts', function () {
+	if ( ! is_front_page() && ! is_shop() && ! is_product_category() && ! is_product() ) {
+		return;
+	}
+
+	$sticky_js = <<<'JS'
+document.addEventListener('DOMContentLoaded', function () {
+	var header = document.getElementById('masthead');
+	if ( ! header ) { return; }
+	var headerHeight = header.offsetHeight;
+	var trigger = headerHeight + 40;
+
+	function onScroll() {
+		if ( window.scrollY > trigger ) {
+			if ( ! document.body.classList.contains('berea-sticky-active') ) {
+				document.body.classList.add('berea-sticky-active');
+				document.body.style.paddingTop = headerHeight + 'px';
+			}
+		} else {
+			if ( document.body.classList.contains('berea-sticky-active') ) {
+				document.body.classList.remove('berea-sticky-active');
+				document.body.style.paddingTop = '';
+			}
+		}
+	}
+
+	window.addEventListener('scroll', onScroll, { passive: true });
+	onScroll();
+});
+JS;
+
+	wp_register_script( 'berea-sticky-header', false, array(), wp_get_theme()->get( 'Version' ), true );
+	wp_enqueue_script( 'berea-sticky-header' );
+	wp_add_inline_script( 'berea-sticky-header', $sticky_js );
+} );
