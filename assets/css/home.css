@@ -26,12 +26,13 @@
 }
 
 .libreria-hero__overlay {
-	background: linear-gradient(180deg, rgba(10, 15, 30, 0.65) 0%, rgba(10, 15, 30, 0.82) 100%) !important;
+	background: linear-gradient(180deg, rgba(10, 15, 30, 0.55) 0%, rgba(10, 15, 30, 0.72) 100%) !important;
 	width: 100%;
 	min-height: 80vh;
 	display: flex;
 	align-items: center;
 	padding: 80px 20px;
+	position: relative;
 }
 
 .libreria-hero__contenido {
@@ -39,22 +40,25 @@
 	margin: 0 auto;
 	text-align: center;
 	color: #fff;
+	position: relative;
+	z-index: 2;
 }
 
 .libreria-hero__titulo {
 	font-size: clamp(2rem, 5vw, 3.5rem);
 	font-weight: 700;
 	line-height: 1.15;
-	color: #fff;
+	color: #fff !important;
 	margin-bottom: 18px;
-	text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+	text-shadow: 0 2px 14px rgba(0, 0, 0, 0.5);
 }
 
 .libreria-hero__subtitulo {
 	font-size: clamp(1.05rem, 2vw, 1.3rem);
 	line-height: 1.5;
 	margin-bottom: 30px;
-	color: rgba(255, 255, 255, 0.92);
+	color: rgba(255, 255, 255, 0.95) !important;
+	text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
 }
 
 .libreria-hero__boton.button {
