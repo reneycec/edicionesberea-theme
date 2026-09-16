@@ -18,9 +18,15 @@
 	padding: 0;
 }
 
-/* Quitar el padding superior que Storefront aplica al contenido en la home */
+/* Quitar el padding superior que Storefront aplica al contenido en la home.
+   Storefront pone ~68px en .site-main (regla .home.blog .site-main), no en .site-content */
 .home .site-content {
 	padding-top: 0 !important;
+}
+
+.home .site-main {
+	padding-top: 0 !important;
+	margin-top: 0 !important;
 }
 
 .libreria-section__titulo {
@@ -94,6 +100,27 @@
 	max-width: 560px;
 	margin: 28px auto 0;
 	text-align: left;
+}
+
+/* --- Hero responsive: ajustes para pantallas pequeñas --- */
+@media screen and (max-width: 768px) {
+	.libreria-hero,
+	.libreria-hero__overlay {
+		min-height: 70vh;
+	}
+
+	.libreria-hero__overlay {
+		padding: 60px 20px;
+	}
+
+	.libreria-hero__boton.button {
+		padding: 14px 32px;
+		font-size: 1rem;
+	}
+
+	.libreria-hero__buscador {
+		max-width: 100%;
+	}
 }
 
 /* Categorías */
