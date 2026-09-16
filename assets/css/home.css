@@ -26,7 +26,7 @@
 }
 
 .libreria-hero__overlay {
-	background: linear-gradient(180deg, rgba(15, 23, 42, 0.55) 0%, rgba(15, 23, 42, 0.75) 100%);
+	background: linear-gradient(180deg, rgba(10, 15, 30, 0.65) 0%, rgba(10, 15, 30, 0.82) 100%) !important;
 	width: 100%;
 	min-height: 80vh;
 	display: flex;
@@ -251,11 +251,18 @@ body.berea-sticky-active.admin-bar #masthead {
     transform: translateY(-4px);
     box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
+.libro-portada {
+    overflow: hidden;
+}
 .libro-portada img {
     max-height: 260px;
     width: auto;
     margin: 0 auto 15px;
     object-fit: contain;
+    transition: transform 0.35s ease;
+}
+.card-libro:hover .libro-portada img {
+    transform: scale(1.07);
 }
 .libro-titulo {
     font-size: 15px;
