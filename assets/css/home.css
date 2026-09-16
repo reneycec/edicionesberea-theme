@@ -9,6 +9,20 @@
 	padding: 40px 20px;
 }
 
+/* El hero rompe el contenedor: ocupa el ancho completo de la ventana */
+.libreria-home section.libreria-hero {
+	max-width: none;
+	width: 100vw;
+	margin-left: calc(50% - 50vw);
+	margin-right: calc(50% - 50vw);
+	padding: 0;
+}
+
+/* Quitar el padding superior que Storefront aplica al contenido en la home */
+.home .site-content {
+	padding-top: 0 !important;
+}
+
 .libreria-section__titulo {
 	font-size: 1.5rem;
 	margin-bottom: 1.25rem;
