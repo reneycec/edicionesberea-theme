@@ -106,11 +106,23 @@
 @media screen and (max-width: 768px) {
 	.libreria-hero,
 	.libreria-hero__overlay {
-		min-height: 70vh;
+		min-height: 75vh;
 	}
 
 	.libreria-hero__overlay {
 		padding: 60px 20px;
+		/* Overlay más oscuro en móvil: la imagen se recorta y el texto
+		   se monta sobre la tipografía de la portada */
+		background: linear-gradient(180deg, rgba(10, 15, 30, 0.72) 0%, rgba(10, 15, 30, 0.85) 100%) !important;
+	}
+
+	.libreria-hero__titulo {
+		font-size: 1.75rem;
+	}
+
+	.libreria-hero__subtitulo {
+		font-size: 1rem;
+		margin-bottom: 22px;
 	}
 
 	.libreria-hero__boton.button {
@@ -120,6 +132,7 @@
 
 	.libreria-hero__buscador {
 		max-width: 100%;
+		margin-top: 22px;
 	}
 }
 
