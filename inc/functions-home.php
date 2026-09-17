@@ -35,7 +35,7 @@ add_action( 'wp_enqueue_scripts', function () {
 		'libreria-home',
 		get_stylesheet_directory_uri() . '/assets/css/home.css',
 		array( 'storefront-style' ),
-		filemtime( get_stylesheet_directory() . '/assets/css/home.css' )
+		filemtime( get_stylesheet_directory() . '/assets/css/home.css' ) . '.' . time()
 	);
 
 	wp_enqueue_script(
