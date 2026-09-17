@@ -34,6 +34,19 @@ function berea_carrusel_scripts() {
                         1024: { slidesPerView: 4, spaceBetween: 25 }
                     }
                 });
+
+                // Hero carrusel: solo si hay más de un slide configurado
+                var heroEl = document.querySelector('.libreria-hero--carrusel');
+                if ( heroEl ) {
+                    new Swiper(heroEl, {
+                        effect: 'fade',
+                        fadeEffect: { crossFade: true },
+                        loop: true,
+                        speed: 900,
+                        autoplay: { delay: 6000, disableOnInteraction: false },
+                        pagination: { el: '.libreria-hero__paginacion', clickable: true }
+                    });
+                }
             });
         " );
     }

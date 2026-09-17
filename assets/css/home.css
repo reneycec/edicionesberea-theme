@@ -64,6 +64,41 @@
 	z-index: 2;
 }
 
+/* Hero carrusel (Swiper con fade) */
+.libreria-hero--carrusel {
+	background: #0a0f1e;
+}
+
+.libreria-hero__slide {
+	background-size: cover;
+	background-position: center;
+	display: flex;
+	align-items: center;
+}
+
+.libreria-hero__slide .libreria-hero__overlay {
+	min-height: inherit;
+	height: 100%;
+}
+
+.libreria-hero__paginacion {
+	bottom: 24px !important;
+	z-index: 5;
+}
+
+.libreria-hero__paginacion .swiper-pagination-bullet {
+	width: 10px;
+	height: 10px;
+	background: rgba(255, 255, 255, 0.5);
+	opacity: 1;
+	transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.libreria-hero__paginacion .swiper-pagination-bullet-active {
+	background: #fff;
+	transform: scale(1.25);
+}
+
 .libreria-hero__titulo {
 	font-size: clamp(2rem, 5vw, 3.5rem);
 	font-weight: 700;
@@ -191,20 +226,43 @@
 	opacity: 1;
 }
 
-/* Franja de confianza */
+/* Subtítulo de sección (debajo del H2) */
+.libreria-section__subtitulo {
+	text-align: center;
+	color: #6b7280;
+	margin: -0.75rem auto 1.5rem;
+	font-size: 0.95rem;
+}
+
+/* Franja de confianza: banda oscura pegada al hero, elimina objeciones
+   de compra en los primeros 5 segundos (envío, pago, devoluciones) */
 .libreria-confianza {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-	gap: 32px;
-	background: #f7f5f0;
+	gap: 20px 48px;
+	background: #1f2937;
+	color: #f3f4f6;
+	max-width: none !important;
+	width: 100vw;
+	margin-left: calc(50% - 50vw) !important;
+	margin-right: calc(50% - 50vw) !important;
+	padding: 22px 20px !important;
 }
 
 .libreria-confianza__item {
 	display: flex;
 	align-items: center;
-	gap: 8px;
-	font-size: 0.9rem;
+	gap: 10px;
+	font-size: 0.95rem;
+	font-weight: 600;
+}
+
+.libreria-confianza__item .dashicons {
+	font-size: 26px;
+	width: 26px;
+	height: 26px;
+	color: #d8a53a;
 }
 
 /* Testimonios */
