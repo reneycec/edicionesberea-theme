@@ -46,6 +46,14 @@ foreach ( array( 2, 3 ) as $n ) {
 }
 
 $es_carrusel = count( $slides ) > 1;
+
+// Precargar la imagen del primer slide: acelera el LCP (Largest Contentful Paint)
+add_action( 'wp_head', function () use ( $slides ) {
+	printf(
+		'<link rel="preload" as="image" href="%s" fetchpriority="high">' . "\n",
+		esc_url( $slides[0]['imagen'] )
+	);
+}, 5 );
 ?>
 <section class="libreria-hero <?php echo $es_carrusel ? 'libreria-hero--carrusel swiper' : ''; ?>" <?php echo $es_carrusel ? '' : "style=\"background-image:url('" . esc_url( $slides[0]['imagen'] ) . "');\""; ?>>
 	<?php if ( $es_carrusel ) : ?>
