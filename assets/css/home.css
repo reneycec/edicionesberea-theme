@@ -64,6 +64,29 @@
 	z-index: 2;
 }
 
+/* Limitar tamaño del logo en el header (estático y fijo) */
+#masthead .site-branding img,
+#masthead .custom-logo {
+	max-height: 64px;
+	width: auto;
+}
+
+#masthead .site-branding .site-title {
+	font-size: 1.5rem;
+	margin: 0;
+}
+
+/* Ajuste de padding del header estático para que no sea tan alto */
+#masthead {
+	padding-top: 16px;
+	padding-bottom: 16px;
+}
+
+#masthead > .col-full {
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
 /* Hero carrusel (Swiper con fade) */
 .libreria-hero--carrusel {
 	background: #0a0f1e;

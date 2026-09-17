@@ -61,7 +61,9 @@ if ( empty( $productos ) ) {
 	<ul class="products libreria-productos__grid">
 		<?php foreach ( $productos as $producto ) :
 			$GLOBALS['product'] = $producto;
+			$GLOBALS['post']    = get_post( $producto->get_id() ); // Necesario para the_title() y the_permalink()
+			setup_postdata( $GLOBALS['post'] );
 			wc_get_template_part( 'content', 'product' );
-		endforeach; ?>
+		endforeach; wp_reset_postdata(); ?>
 	</ul>
 </section>
