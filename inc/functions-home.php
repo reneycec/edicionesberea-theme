@@ -33,9 +33,9 @@ add_action( 'wp_enqueue_scripts', function () {
 
 	wp_enqueue_style(
 		'libreria-home',
-		get_stylesheet_directory_uri() . '/assets/css/home.css',
+		get_stylesheet_directory_uri() . '/assets/css/home-v2.css',
 		array( 'storefront-style' ),
-		filemtime( get_stylesheet_directory() . '/assets/css/home.css' ) . '.' . time()
+		filemtime( get_stylesheet_directory() . '/assets/css/home-v2.css' ) . '.' . time()
 	);
 
 	wp_enqueue_script(
