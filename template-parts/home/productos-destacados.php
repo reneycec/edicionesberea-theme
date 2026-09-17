@@ -15,29 +15,39 @@ if ( ! function_exists( 'wc_get_products' ) || ! function_exists( 'wc_get_templa
 	return;
 }
 
-// Intentar primero por ventas reales.
+// Intentar primero por ventas reales (solo productos que SÍ han vendido).
 $productos = wc_get_products( array(
-	'status'  => 'publish',
-	'limit'   => 8,
-	'orderby' => 'meta_value_num',
-	'meta_key'=> 'total_sales',
-	'order'   => 'DESC',
+	'status'     => 'publish',
+	'limit'      => 8,
+	'orderby'    => 'meta_value_num',
+	'meta_key'   => 'total_sales',
+	'order'      => 'DESC',
+	'meta_query' => array(
+		array(
+			'key'     => 'total_sales',
+			'value'   => 0,
+			'compare' => '>',
+			'type'    => 'NUMERIC',
+		),
+	),
 ) );
 
-// Fallback: si ninguno tiene ventas registradas, usar destacados.
-$hay_ventas = false;
-foreach ( $productos as $p ) {
-	if ( (int) $p->get_total_sales() > 0 ) {
-		$hay_ventas = true;
-		break;
-	}
-}
-
-if ( ! $hay_ventas ) {
+// Fallback 1: productos marcados como destacados.
+if ( empty( $productos ) ) {
 	$productos = wc_get_products( array(
 		'status'   => 'publish',
 		'limit'    => 8,
 		'featured' => true,
+	) );
+}
+
+// Fallback 2: últimos productos publicados (nunca sección vacía).
+if ( empty( $productos ) ) {
+	$productos = wc_get_products( array(
+		'status'  => 'publish',
+		'limit'   => 8,
+		'orderby' => 'date',
+		'order'   => 'DESC',
 	) );
 }
 
