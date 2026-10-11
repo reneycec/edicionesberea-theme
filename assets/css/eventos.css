@@ -1,0 +1,438 @@
+/* ==========================================================================
+   Eventos y Seminarios — Ediciones Berea
+   Diseño Editorial de Alto Impacto para Conferencias Cumbres y Capacitación
+   ========================================================================== */
+
+.page-eventos-editorial {
+	padding: 0;
+}
+
+body.page-template-page-eventos,
+body.page-template-page-eventos-php,
+body.page-eventos,
+body.page-eventos-seminarios,
+body.page-seminarios {
+	overflow-x: hidden;
+}
+
+body.page-template-page-eventos #content,
+body.page-template-page-eventos-php #content,
+body.page-eventos #content,
+body.page-eventos-seminarios #content,
+body.page-seminarios #content {
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
+}
+
+body.page-template-page-eventos .entry-header,
+body.page-template-page-eventos-php .entry-header,
+body.page-eventos .entry-header,
+body.page-eventos-seminarios .entry-header,
+body.page-seminarios .entry-header {
+	display: none; /* Reemplazado por el Hero propio */
+}
+
+.be-eventos-wrap {
+	font-family: var(--be-font-sans);
+	color: var(--be-text-body);
+}
+
+/* --------------------------------------------------------------------------
+   1. HERO DE EVENTOS
+   -------------------------------------------------------------------------- */
+.be-events-hero {
+	background: radial-gradient(circle at 75% 25%, #1e2c4c 0%, #0b1326 50%, #060b14 100%);
+	color: #ffffff;
+	padding: 100px 0 80px;
+	position: relative;
+	overflow: hidden;
+}
+
+.be-events-hero::before {
+	content: "";
+	position: absolute;
+	top: -40%;
+	right: -15%;
+	width: 550px;
+	height: 550px;
+	background: radial-gradient(circle, rgba(200, 152, 42, 0.14) 0%, transparent 70%);
+	pointer-events: none;
+}
+
+.be-events-hero__content {
+	max-width: 860px;
+	margin: 0 auto;
+	text-align: center;
+	position: relative;
+	z-index: 2;
+}
+
+.be-events-hero__title {
+	font-family: var(--be-font-serif);
+	font-size: clamp(2.3rem, 4.5vw, 3.4rem);
+	color: #ffffff;
+	line-height: 1.18;
+	margin: 0 0 24px;
+	letter-spacing: -0.02em;
+}
+
+.be-events-hero__lead {
+	font-size: clamp(1.05rem, 2vw, 1.25rem);
+	line-height: 1.65;
+	color: rgba(255, 255, 255, 0.85);
+	margin: 0 auto 36px;
+	max-width: 760px;
+}
+
+.be-events-hero__actions {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 16px;
+	flex-wrap: wrap;
+}
+
+/* --------------------------------------------------------------------------
+   2. CONFERENCIAS MAGNAS DESTACADAS (CIMA 2027 & SED 2027)
+   -------------------------------------------------------------------------- */
+.be-featured-events-section {
+	padding: 90px 0;
+	background: #ffffff;
+}
+
+.be-featured-events-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 36px;
+}
+
+.be-event-feature-card {
+	background: #ffffff;
+	border: 1px solid var(--be-border);
+	border-radius: var(--be-radius-lg);
+	overflow: hidden;
+	box-shadow: 0 16px 40px rgba(11, 19, 38, 0.08);
+	display: flex;
+	flex-direction: column;
+	transition: all 0.3s ease;
+}
+
+.be-event-feature-card:hover {
+	transform: translateY(-6px);
+	box-shadow: 0 24px 50px rgba(11, 19, 38, 0.14);
+	border-color: var(--be-gold-400);
+}
+
+.be-event-feature-card__img-wrap {
+	position: relative;
+	height: 280px;
+	overflow: hidden;
+	background: var(--be-navy-950);
+}
+
+.be-event-photo {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+	transition: transform 0.4s ease;
+}
+
+.be-event-feature-card:hover .be-event-photo {
+	transform: scale(1.04);
+}
+
+.be-event-badge-floating {
+	position: absolute;
+	top: 16px;
+	right: 16px;
+	background: rgba(11, 19, 38, 0.88);
+	border: 1px solid var(--be-gold-400);
+	color: var(--be-gold-300);
+	font-size: 0.75rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	padding: 5px 12px;
+	border-radius: var(--be-radius-full);
+	backdrop-filter: blur(4px);
+}
+
+.be-event-feature-card__body {
+	padding: 34px 30px;
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+}
+
+.be-event-meta {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	margin-bottom: 14px;
+	font-size: 0.85rem;
+	color: var(--be-gold-600);
+	font-weight: 600;
+}
+
+.be-event-date {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.be-event-date svg {
+	width: 16px;
+	height: 16px;
+}
+
+.be-event-title {
+	font-family: var(--be-font-serif);
+	font-size: 1.45rem;
+	color: var(--be-navy-950);
+	line-height: 1.3;
+	margin: 0 0 14px;
+}
+
+.be-event-desc {
+	font-size: 0.95rem;
+	line-height: 1.65;
+	color: var(--be-text-body);
+	margin: 0 0 20px;
+	flex: 1;
+}
+
+.be-event-topics {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-bottom: 24px;
+}
+
+.be-topic-pill {
+	background: var(--be-cream-bg);
+	border: 1px solid var(--be-border);
+	color: var(--be-navy-900);
+	font-size: 0.78rem;
+	font-weight: 600;
+	padding: 4px 12px;
+	border-radius: var(--be-radius-full);
+}
+
+.be-event-card-actions .be-btn {
+	width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   3. SEMINARIOS MODULARES
+   -------------------------------------------------------------------------- */
+.be-modular-seminars-section {
+	padding: 90px 0;
+	background: var(--be-navy-900);
+	color: #ffffff;
+}
+
+.be-section-heading--light {
+	color: #ffffff !important;
+}
+
+.be-section-subheading--light {
+	color: rgba(255, 255, 255, 0.75) !important;
+}
+
+.be-seminars-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+	gap: 26px;
+}
+
+.be-seminar-card {
+	background: rgba(255, 255, 255, 0.04);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: var(--be-radius-md);
+	padding: 34px 26px;
+	display: flex;
+	flex-direction: column;
+	transition: all 0.25s ease;
+}
+
+.be-seminar-card:hover {
+	transform: translateY(-5px);
+	background: rgba(255, 255, 255, 0.08);
+	border-color: var(--be-gold-400);
+	box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3);
+}
+
+.be-seminar-icon {
+	width: 50px;
+	height: 50px;
+	border-radius: var(--be-radius-md);
+	background: linear-gradient(135deg, var(--be-gold-400) 0%, var(--be-gold-500) 100%);
+	color: var(--be-navy-950);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 20px;
+	box-shadow: 0 6px 16px rgba(200, 152, 42, 0.3);
+}
+
+.be-seminar-icon svg {
+	width: 24px;
+	height: 24px;
+}
+
+.be-seminar-card h3 {
+	font-family: var(--be-font-serif);
+	font-size: 1.3rem;
+	color: #ffffff;
+	margin: 0 0 12px;
+	line-height: 1.3;
+}
+
+.be-seminar-card p {
+	font-size: 0.92rem;
+	line-height: 1.65;
+	color: rgba(255, 255, 255, 0.8);
+	margin: 0 0 20px;
+	flex: 1;
+}
+
+.be-seminar-details {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	border-top: 1px solid rgba(255, 255, 255, 0.08);
+	padding-top: 16px;
+}
+
+.be-seminar-details span {
+	font-size: 0.8rem;
+	color: var(--be-gold-300);
+}
+
+/* --------------------------------------------------------------------------
+   4. EXPERIENCIA Y METODOLOGÍA
+   -------------------------------------------------------------------------- */
+.be-experience-section {
+	padding: 90px 0;
+	background: #ffffff;
+}
+
+.be-experience-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	gap: 28px;
+}
+
+.be-exp-item {
+	background: var(--be-cream-bg);
+	border: 1px solid var(--be-border);
+	border-radius: var(--be-radius-md);
+	padding: 30px 24px;
+	position: relative;
+	transition: transform 0.2s ease;
+}
+
+.be-exp-item:hover {
+	transform: translateY(-4px);
+	border-color: var(--be-gold-400);
+}
+
+.be-exp-num {
+	font-family: var(--be-font-serif);
+	font-size: 2.2rem;
+	font-weight: 700;
+	color: var(--be-gold-400);
+	line-height: 1;
+	margin-bottom: 12px;
+	opacity: 0.85;
+}
+
+.be-exp-item h4 {
+	font-family: var(--be-font-serif);
+	font-size: 1.15rem;
+	color: var(--be-navy-950);
+	margin: 0 0 10px;
+}
+
+.be-exp-item p {
+	font-size: 0.9rem;
+	line-height: 1.6;
+	color: var(--be-text-body);
+	margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   5. INVITA A EDICIONES BEREA (CTA)
+   -------------------------------------------------------------------------- */
+.be-invite-section {
+	padding: 80px 0;
+	background: #ffffff;
+}
+
+.be-invite-card {
+	background: radial-gradient(circle at 75% 25%, #1e2c4c 0%, #0b1326 60%, #060b14 100%);
+	border-radius: var(--be-radius-lg);
+	padding: 64px 40px;
+	text-align: center;
+	color: #ffffff;
+	box-shadow: 0 20px 50px rgba(11, 19, 38, 0.2);
+}
+
+.be-invite-content {
+	max-width: 760px;
+	margin: 0 auto;
+}
+
+.be-invite-content h2 {
+	font-family: var(--be-font-serif);
+	font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+	color: #ffffff;
+	margin: 0 0 16px;
+}
+
+.be-invite-content p {
+	font-size: 1.05rem;
+	color: rgba(255, 255, 255, 0.85);
+	line-height: 1.65;
+	margin: 0 0 32px;
+}
+
+.be-invite-actions {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 16px;
+	flex-wrap: wrap;
+	margin-bottom: 20px;
+}
+
+.be-invite-footer-note {
+	font-size: 0.82rem !important;
+	color: rgba(255, 255, 255, 0.55) !important;
+	margin: 0 !important;
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 900px) {
+	.be-featured-events-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.be-event-feature-card__img-wrap {
+		height: 240px;
+	}
+}
+
+@media screen and (max-width: 640px) {
+	.be-events-hero {
+		padding: 70px 0 50px;
+	}
+
+	.be-invite-card {
+		padding: 40px 20px;
+	}
+}

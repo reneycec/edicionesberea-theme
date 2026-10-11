@@ -50,6 +50,28 @@ function berea_child_enqueue_styles() {
             file_exists( $servicios_css ) ? filemtime( $servicios_css ) : wp_get_theme()->get( 'Version' )
         );
     }
+
+    // 7. Estilos específicos para la plantilla de Nosotros / Nuestra Historia
+    if ( is_page_template( 'page-nosotros.php' ) || is_page( array( 'nosotros', 'historia', 'nuestra-historia' ) ) ) {
+        $nosotros_css = get_stylesheet_directory() . '/assets/css/nosotros.css';
+        wp_enqueue_style(
+            'berea-nosotros',
+            get_stylesheet_directory_uri() . '/assets/css/nosotros.css',
+            array( 'berea-global-style' ),
+            file_exists( $nosotros_css ) ? filemtime( $nosotros_css ) : wp_get_theme()->get( 'Version' )
+        );
+    }
+
+    // 8. Estilos específicos para la plantilla de Eventos y Seminarios
+    if ( is_page_template( 'page-eventos.php' ) || is_page( array( 'eventos', 'seminarios', 'eventos-seminarios' ) ) ) {
+        $eventos_css = get_stylesheet_directory() . '/assets/css/eventos.css';
+        wp_enqueue_style(
+            'berea-eventos',
+            get_stylesheet_directory_uri() . '/assets/css/eventos.css',
+            array( 'berea-global-style' ),
+            file_exists( $eventos_css ) ? filemtime( $eventos_css ) : wp_get_theme()->get( 'Version' )
+        );
+    }
 }
 
 // Incluir módulos del tema
