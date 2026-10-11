@@ -8,6 +8,17 @@ function berea_child_enqueue_styles() {
     // Estilo principal del tema hijo (style.css)
     wp_enqueue_style( 'berea-child-style', get_stylesheet_uri(), array( 'storefront-style' ), wp_get_theme()->get( 'Version' ) );
 
+    // Estilos específicos para la plantilla de Servicios Editoriales
+    if ( is_page_template( 'page-servicios-editoriales.php' ) || is_page( 'servicios-editoriales' ) ) {
+        wp_enqueue_style(
+            'berea-servicios-editoriales',
+            get_stylesheet_directory_uri() . '/assets/css/servicios-editoriales.css',
+            array( 'storefront-style' ),
+            file_exists( get_stylesheet_directory() . '/assets/css/servicios-editoriales.css' )
+                ? filemtime( get_stylesheet_directory() . '/assets/css/servicios-editoriales.css' )
+                : wp_get_theme()->get( 'Version' )
+        );
+    }
 }
 
 // Incluir funciones adicionales desde la carpeta /inc
