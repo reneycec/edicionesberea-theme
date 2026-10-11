@@ -1,0 +1,1057 @@
+/* ==========================================================================
+   Ediciones Berea — Sistema de Diseño e Identidad Gráfica Global
+   Aplica a todo el sitio: Tipografía, Encabezados, Header Fijo, Menú Móvil y Footer
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. VARIABLES Y DESIGN TOKENS
+   -------------------------------------------------------------------------- */
+:root {
+	/* Azules Institucionales Profundos */
+	--be-navy-950: #060b14;
+	--be-navy-900: #0b1326;
+	--be-navy-800: #141f38;
+	--be-navy-700: #1e2c4c;
+	--be-navy-600: #293b63;
+
+	/* Oro y Dorado Editorial */
+	--be-gold-600: #a57c1d;
+	--be-gold-500: #c8982a;
+	--be-gold-400: #dfb14b;
+	--be-gold-300: #f1ce7c;
+	--be-gold-100: #faf3e2;
+	--be-gold-50:  #fdfbf6;
+
+	/* Superficies y Neutros */
+	--be-cream-bg:   #f9f7f2;
+	--be-cream-card: #ffffff;
+	--be-border:     #e7e2d6;
+	--be-text-dark:  #121826;
+	--be-text-body:  #445065;
+	--be-text-muted: #6b7280;
+	--be-text-light: #ffffff;
+
+	/* Tipografía */
+	--be-font-serif: "Playfair Display", "Merriweather", "Georgia", "Cambria", serif;
+	--be-font-sans:  "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+	/* Geometría y Sombras */
+	--be-radius-sm:  6px;
+	--be-radius-md:  12px;
+	--be-radius-lg:  20px;
+	--be-radius-full:9999px;
+	--be-shadow-card:0 6px 24px rgba(11, 19, 38, 0.06);
+	--be-shadow-hover:0 16px 36px -6px rgba(11, 19, 38, 0.12), 0 0 0 1px rgba(200, 152, 42, 0.25);
+}
+
+/* --------------------------------------------------------------------------
+   2. TIPOGRAFÍA Y ENCABEZADOS GLOBALES
+   -------------------------------------------------------------------------- */
+body {
+	font-family: var(--be-font-sans);
+	color: var(--be-text-body);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6,
+.site-title,
+.entry-title,
+.page-title,
+.woocommerce-loop-product__title,
+.product_title,
+.widget-title,
+.gamma {
+	font-family: var(--be-font-serif);
+	color: var(--be-navy-900);
+	letter-spacing: -0.015em;
+	font-weight: 700;
+	line-height: 1.25;
+}
+
+h1 { font-size: clamp(2rem, 4vw, 2.75rem); }
+h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); }
+h3 { font-size: clamp(1.3rem, 2.5vw, 1.7rem); }
+h4 { font-size: clamp(1.1rem, 2vw, 1.35rem); }
+
+a {
+	color: var(--be-navy-800);
+	text-decoration: none;
+	transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+a:hover,
+a:focus {
+	color: var(--be-gold-600);
+}
+
+/* Botones con estilo institucional en WooCommerce y Storefront */
+.button.primary,
+button.button.alt,
+input[type="submit"].button.alt,
+.woocommerce #respond input#submit.alt,
+.woocommerce a.button.alt,
+.woocommerce button.button.alt,
+.woocommerce input.button.alt {
+	background: linear-gradient(135deg, var(--be-gold-400) 0%, var(--be-gold-500) 100%) !important;
+	color: var(--be-navy-950) !important;
+	font-family: var(--be-font-sans) !important;
+	font-weight: 700 !important;
+	border: none !important;
+	border-radius: var(--be-radius-sm) !important;
+	padding: 12px 24px !important;
+	text-transform: uppercase !important;
+	letter-spacing: 0.04em !important;
+	font-size: 0.88rem !important;
+	transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease !important;
+	box-shadow: 0 4px 14px rgba(200, 152, 42, 0.25) !important;
+}
+
+.button.primary:hover,
+button.button.alt:hover,
+input[type="submit"].button.alt:hover,
+.woocommerce #respond input#submit.alt:hover,
+.woocommerce a.button.alt:hover,
+.woocommerce button.button.alt:hover,
+.woocommerce input.button.alt:hover {
+	background: linear-gradient(135deg, #f1ce7c 0%, var(--be-gold-400) 100%) !important;
+	transform: translateY(-2px) !important;
+	box-shadow: 0 6px 20px rgba(200, 152, 42, 0.4) !important;
+}
+
+/* --------------------------------------------------------------------------
+   3. CABECERA Y HEADER FIJO GLOBAL (STICKY)
+   -------------------------------------------------------------------------- */
+#masthead {
+	background: #ffffff;
+	border-bottom: 1px solid var(--be-border);
+	transition: padding 0.25s ease, box-shadow 0.25s ease;
+}
+
+#masthead .site-branding img,
+#masthead .custom-logo {
+	max-height: 56px;
+	width: auto;
+	transition: max-height 0.25s ease;
+}
+
+#masthead .site-branding .site-title a {
+	font-family: var(--be-font-serif);
+	color: var(--be-navy-900);
+	font-weight: 700;
+}
+
+#masthead .main-navigation ul.menu > li > a,
+#masthead .main-navigation ul.nav-menu > li > a {
+	font-family: var(--be-font-sans);
+	font-weight: 600;
+	font-size: 0.95rem;
+	color: var(--be-navy-900);
+	padding: 16px 14px;
+	transition: color 0.2s ease;
+	position: relative;
+}
+
+#masthead .main-navigation ul.menu > li > a:hover,
+#masthead .main-navigation ul.nav-menu > li > a:hover {
+	color: var(--be-gold-600);
+}
+
+/* Modo Sticky Activo */
+body.berea-sticky-active #masthead {
+	position: fixed !important;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 9999;
+	background: rgba(255, 255, 255, 0.98);
+	backdrop-filter: blur(8px);
+	border-bottom: 2px solid var(--be-gold-400);
+	box-shadow: 0 4px 20px rgba(11, 19, 38, 0.08);
+	padding-top: 8px !important;
+	padding-bottom: 8px !important;
+	animation: bereaStickyIn 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.berea-sticky-active #masthead .site-branding img,
+body.berea-sticky-active #masthead .custom-logo {
+	max-height: 42px !important;
+}
+
+body.berea-sticky-active #masthead .main-navigation ul.menu > li > a,
+body.berea-sticky-active #masthead .main-navigation ul.nav-menu > li > a {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+/* Compatibilidad con barra de admin de WordPress */
+body.berea-sticky-active.admin-bar #masthead {
+	top: 32px;
+}
+
+@media screen and (max-width: 782px) {
+	body.berea-sticky-active.admin-bar #masthead {
+		top: 46px;
+	}
+}
+
+@keyframes bereaStickyIn {
+	from {
+		transform: translateY(-100%);
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+/* --------------------------------------------------------------------------
+   4. BOTÓN HAMBURGUESA Y DRAWER OFF-CANVAS RESPONSIVE
+   -------------------------------------------------------------------------- */
+
+/* Ocultar el botón hamburguesa nativo de Storefront */
+#site-navigation-menu-toggle,
+.main-navigation .menu-toggle {
+	display: none !important;
+}
+
+/* Botón Hamburguesa Berea */
+.berea-hamburger-btn {
+	display: none;
+	align-items: center;
+	gap: 10px;
+	background: transparent;
+	border: 1px solid var(--be-border);
+	border-radius: var(--be-radius-sm);
+	padding: 8px 14px;
+	cursor: pointer;
+	color: var(--be-navy-900);
+	font-family: var(--be-font-sans);
+	font-size: 0.9rem;
+	font-weight: 600;
+	transition: all 0.2s ease;
+}
+
+.berea-hamburger-btn:hover {
+	background: var(--be-cream-bg);
+	border-color: var(--be-gold-400);
+	color: var(--be-gold-600);
+}
+
+.berea-hamburger-box {
+	width: 22px;
+	height: 16px;
+	position: relative;
+	display: inline-block;
+}
+
+.berea-hamburger-inner,
+.berea-hamburger-inner::before,
+.berea-hamburger-inner::after {
+	width: 22px;
+	height: 2px;
+	background-color: currentColor;
+	border-radius: 2px;
+	position: absolute;
+	transition: transform 0.22s ease, opacity 0.22s ease;
+}
+
+.berea-hamburger-inner {
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.berea-hamburger-inner::before,
+.berea-hamburger-inner::after {
+	content: "";
+	display: block;
+}
+
+.berea-hamburger-inner::before {
+	top: -7px;
+}
+
+.berea-hamburger-inner::after {
+	bottom: -7px;
+}
+
+/* Estado activo del botón hamburguesa */
+.berea-hamburger-btn.is-active .berea-hamburger-inner {
+	background-color: transparent;
+}
+
+.berea-hamburger-btn.is-active .berea-hamburger-inner::before {
+	top: 0;
+	transform: rotate(45deg);
+}
+
+.berea-hamburger-btn.is-active .berea-hamburger-inner::after {
+	bottom: 0;
+	transform: rotate(-45deg);
+}
+
+@media screen and (max-width: 1024px) {
+	.berea-hamburger-btn {
+		display: inline-flex !important;
+	}
+
+	/* Ocultar el menú plano tradicional en mobile para favorecer el drawer */
+	#masthead .main-navigation .primary-navigation,
+	#masthead .main-navigation .handheld-navigation {
+		display: none !important;
+	}
+
+	#masthead .site-header-cart {
+		margin-left: auto;
+		margin-right: 12px;
+	}
+}
+
+/* Overlay */
+.berea-drawer-overlay {
+	position: fixed;
+	inset: 0;
+	background: rgba(6, 11, 20, 0.72);
+	backdrop-filter: blur(4px);
+	z-index: 99998;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.3s ease;
+}
+
+.berea-drawer-overlay.is-visible {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+body.berea-drawer-open {
+	overflow: hidden;
+}
+
+/* Panel Drawer Off-Canvas */
+.berea-mobile-drawer {
+	position: fixed;
+	top: 0;
+	right: -360px;
+	width: 340px;
+	max-width: 88vw;
+	height: 100vh;
+	background: var(--be-navy-950);
+	color: #ffffff;
+	z-index: 99999;
+	box-shadow: -8px 0 32px rgba(0, 0, 0, 0.4);
+	display: flex;
+	flex-direction: column;
+	transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+.berea-mobile-drawer.is-open {
+	transform: translateX(-360px);
+}
+
+/* Header del Drawer */
+.berea-drawer__header {
+	padding: 24px 20px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+	background: var(--be-navy-900);
+}
+
+.berea-drawer__logo-text {
+	display: block;
+	font-family: var(--be-font-serif);
+	font-size: 1.2rem;
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	color: var(--be-gold-400);
+}
+
+.berea-drawer__tagline {
+	display: block;
+	font-size: 0.75rem;
+	color: rgba(255, 255, 255, 0.6);
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+}
+
+.berea-drawer-close {
+	background: rgba(255, 255, 255, 0.08);
+	border: 1px solid rgba(255, 255, 255, 0.12);
+	color: #ffffff;
+	width: 38px;
+	height: 38px;
+	border-radius: var(--be-radius-sm);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+
+.berea-drawer-close:hover {
+	background: var(--be-gold-500);
+	color: var(--be-navy-950);
+}
+
+/* Acciones Rápidas del Drawer */
+.berea-drawer__quick-actions {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 10px;
+	padding: 16px 20px;
+	background: rgba(11, 19, 38, 0.6);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.berea-drawer-quick-link {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	color: #ffffff;
+	background: rgba(255, 255, 255, 0.06);
+	padding: 10px 12px;
+	border-radius: var(--be-radius-sm);
+	font-size: 0.88rem;
+	font-weight: 600;
+	transition: background 0.2s ease, color 0.2s ease;
+}
+
+.berea-drawer-quick-link:hover {
+	background: rgba(200, 152, 42, 0.2);
+	color: var(--be-gold-300);
+}
+
+.berea-cart-pill {
+	margin-left: auto;
+	background: var(--be-gold-500);
+	color: var(--be-navy-950);
+	font-size: 0.75rem;
+	font-weight: 800;
+	padding: 2px 7px;
+	border-radius: var(--be-radius-full);
+}
+
+/* Menú de Enlaces del Drawer */
+.berea-drawer__nav {
+	flex: 1;
+	padding: 16px 0;
+}
+
+.berea-drawer-menu {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.berea-drawer-menu li {
+	position: relative;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.berea-drawer-menu li a {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 14px 22px;
+	color: rgba(255, 255, 255, 0.88);
+	font-size: 1rem;
+	font-weight: 500;
+	transition: background 0.2s ease, color 0.2s ease, padding-left 0.2s ease;
+}
+
+.berea-drawer-menu li a:hover {
+	color: var(--be-gold-400);
+	background: rgba(255, 255, 255, 0.03);
+	padding-left: 26px;
+}
+
+.berea-drawer-highlight {
+	color: var(--be-gold-300) !important;
+	font-weight: 700 !important;
+}
+
+.berea-gold-tag {
+	font-size: 0.7rem;
+	background: var(--be-gold-500);
+	color: var(--be-navy-950);
+	padding: 2px 8px;
+	border-radius: var(--be-radius-full);
+	font-weight: 700;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+}
+
+/* Submenús */
+.berea-submenu-toggle {
+	position: absolute;
+	right: 12px;
+	top: 10px;
+	background: transparent;
+	border: none;
+	color: rgba(255, 255, 255, 0.6);
+	width: 32px;
+	height: 32px;
+	cursor: pointer;
+	transition: transform 0.2s ease;
+}
+
+.berea-drawer-menu li.submenu-expanded > .berea-submenu-toggle {
+	transform: rotate(180deg);
+}
+
+.berea-drawer-menu ul.sub-menu {
+	display: none;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	background: rgba(0, 0, 0, 0.25);
+}
+
+.berea-drawer-menu li.submenu-expanded > ul.sub-menu {
+	display: block;
+}
+
+.berea-drawer-menu ul.sub-menu li a {
+	padding-left: 36px;
+	font-size: 0.9rem;
+	color: rgba(255, 255, 255, 0.7);
+}
+
+/* CTA WhatsApp en Drawer */
+.berea-drawer__cta {
+	padding: 20px;
+	background: var(--be-navy-900);
+	border-top: 1px solid rgba(255, 255, 255, 0.08);
+	text-align: center;
+}
+
+.berea-drawer-wa-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	background: #25D366;
+	color: #ffffff;
+	font-weight: 700;
+	font-size: 0.92rem;
+	padding: 12px 18px;
+	border-radius: var(--be-radius-sm);
+	box-shadow: 0 4px 14px rgba(37, 211, 102, 0.25);
+	transition: all 0.2s ease;
+}
+
+.berea-drawer-wa-btn:hover {
+	background: #20ba5a;
+	color: #ffffff;
+	transform: translateY(-2px);
+}
+
+.berea-drawer-phone {
+	margin: 8px 0 0;
+	font-size: 0.8rem;
+	color: rgba(255, 255, 255, 0.55);
+}
+
+/* --------------------------------------------------------------------------
+   5. NUEVO PIE DE PÁGINA (FOOTER) INTEGRAL EN 3 BLOQUES
+   -------------------------------------------------------------------------- */
+.berea-footer {
+	background: var(--be-navy-900);
+	color: #ffffff;
+	width: 100vw;
+	position: relative;
+	left: 50%;
+	right: 50%;
+	margin-left: -50vw;
+	margin-right: -50vw;
+	box-sizing: border-box;
+	clear: both;
+}
+
+.berea-footer-container {
+	max-width: 1240px;
+	margin: 0 auto;
+	padding: 0 24px;
+	box-sizing: border-box;
+}
+
+/* ----------------------------------
+   BLOQUE 1: Top (Columnas + Newsletter)
+   ---------------------------------- */
+.berea-footer__top {
+	padding: 64px 0 54px;
+	background: var(--be-navy-900);
+}
+
+.berea-footer__grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 380px;
+	gap: 36px;
+	align-items: start;
+}
+
+.berea-footer__col-title {
+	font-family: var(--be-font-serif);
+	font-size: 1.15rem;
+	color: #ffffff;
+	margin: 0 0 20px;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	position: relative;
+	padding-bottom: 12px;
+}
+
+.berea-footer__col-title::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 32px;
+	height: 2px;
+	background: var(--be-gold-400);
+}
+
+.berea-footer__nav-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.berea-footer__nav-list li {
+	margin-bottom: 12px;
+}
+
+.berea-footer__nav-list li a {
+	color: rgba(255, 255, 255, 0.72);
+	font-size: 0.92rem;
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	transition: all 0.2s ease;
+}
+
+.berea-footer__nav-list li a:hover {
+	color: var(--be-gold-300);
+	transform: translateX(4px);
+}
+
+.berea-highlight-link {
+	color: var(--be-gold-300) !important;
+	font-weight: 600;
+}
+
+.berea-badge-pill {
+	font-size: 0.65rem;
+	background: var(--be-gold-500);
+	color: var(--be-navy-950);
+	padding: 2px 6px;
+	border-radius: var(--be-radius-full);
+	font-weight: 800;
+	text-transform: uppercase;
+}
+
+/* Tarjeta de Newsletter Blanca */
+.berea-newsletter-card {
+	background: #ffffff;
+	border-radius: 16px;
+	padding: 32px 28px;
+	color: var(--be-text-dark);
+	box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+}
+
+.berea-newsletter-card__header {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.berea-newsletter-card__title {
+	font-family: var(--be-font-serif);
+	font-size: 1.65rem;
+	font-weight: 700;
+	color: var(--be-navy-950);
+	margin: 0 0 6px;
+	letter-spacing: 0.02em;
+}
+
+.berea-newsletter-card__subtitle {
+	font-size: 0.88rem;
+	color: var(--be-text-muted);
+	margin: 0;
+	line-height: 1.4;
+}
+
+.berea-newsletter-form .berea-form-field {
+	margin-bottom: 14px;
+}
+
+.berea-newsletter-form input[type="email"] {
+	width: 100%;
+	box-sizing: border-box;
+	padding: 12px 16px;
+	border: 1px solid var(--be-border);
+	border-radius: var(--be-radius-sm);
+	font-size: 0.92rem;
+	font-family: var(--be-font-sans);
+	background: #ffffff;
+	color: var(--be-text-dark);
+	transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.berea-newsletter-form input[type="email"]:focus {
+	border-color: var(--be-gold-500);
+	box-shadow: 0 0 0 3px rgba(200, 152, 42, 0.15);
+	outline: none;
+}
+
+.berea-form-consent {
+	margin-bottom: 18px;
+}
+
+.berea-checkbox-label {
+	display: flex;
+	align-items: flex-start;
+	gap: 8px;
+	cursor: pointer;
+}
+
+.berea-checkbox-label input[type="checkbox"] {
+	margin-top: 3px;
+	accent-color: var(--be-gold-500);
+}
+
+.berea-checkbox-text {
+	font-size: 0.78rem;
+	color: var(--be-text-body);
+	line-height: 1.35;
+}
+
+.berea-form-disclaimer {
+	font-size: 0.72rem;
+	color: var(--be-text-muted);
+	margin: 6px 0 0 22px;
+	line-height: 1.3;
+}
+
+.berea-newsletter-btn {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	background: linear-gradient(135deg, var(--be-gold-400) 0%, var(--be-gold-500) 100%);
+	color: var(--be-navy-950);
+	font-family: var(--be-font-sans);
+	font-weight: 700;
+	font-size: 0.9rem;
+	letter-spacing: 0.05em;
+	padding: 13px 20px;
+	border: none;
+	border-radius: var(--be-radius-sm);
+	cursor: pointer;
+	transition: all 0.2s ease;
+	box-shadow: 0 4px 14px rgba(200, 152, 42, 0.3);
+}
+
+.berea-newsletter-btn:hover {
+	background: linear-gradient(135deg, #f1ce7c 0%, var(--be-gold-400) 100%);
+	transform: translateY(-2px);
+	box-shadow: 0 6px 20px rgba(200, 152, 42, 0.45);
+}
+
+.berea-newsletter-btn:disabled {
+	opacity: 0.7;
+	cursor: not-allowed;
+	transform: none;
+}
+
+.berea-form-message {
+	margin: 12px 0 0;
+	font-size: 0.85rem;
+	text-align: center;
+	border-radius: var(--be-radius-sm);
+	padding: 8px;
+	display: none;
+}
+
+.berea-form-message.is-success {
+	display: block;
+	background: #ecfdf5;
+	color: #065f46;
+	border: 1px solid #a7f3d0;
+}
+
+.berea-form-message.is-error {
+	display: block;
+	background: #fef2f2;
+	color: #991b1b;
+	border: 1px solid #fecaca;
+}
+
+.berea-form-message.is-loading {
+	display: block;
+	background: #f3f4f6;
+	color: #4b5563;
+}
+
+/* ----------------------------------
+   BLOQUE 2: Middle (Contacto, Pagos y Redes)
+   ---------------------------------- */
+.berea-footer__middle {
+	background: var(--be-navy-950);
+	border-top: 1px solid rgba(255, 255, 255, 0.08);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+	padding: 24px 0;
+}
+
+.berea-footer-middle__wrap {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 24px;
+	flex-wrap: wrap;
+}
+
+/* Contacto Directo */
+.berea-footer-contact {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+}
+
+.berea-footer-contact__icon-wrap {
+	width: 44px;
+	height: 44px;
+	border-radius: var(--be-radius-full);
+	background: rgba(200, 152, 42, 0.15);
+	border: 1px solid rgba(200, 152, 42, 0.3);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--be-gold-400);
+}
+
+.berea-contact-brand-icon {
+	width: 22px;
+	height: 22px;
+}
+
+.berea-footer-contact__info {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.berea-contact-phone {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	font-size: 1.05rem;
+	font-weight: 700;
+	color: #ffffff;
+}
+
+.berea-contact-phone:hover {
+	color: var(--be-gold-300);
+}
+
+.berea-contact-wa-icon {
+	width: 18px;
+	height: 18px;
+	color: #25D366;
+}
+
+.berea-contact-email {
+	font-size: 0.84rem;
+	color: rgba(255, 255, 255, 0.65);
+}
+
+.berea-contact-email:hover {
+	color: var(--be-gold-400);
+}
+
+/* Métodos de Pago */
+.berea-footer-payments {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	flex-wrap: wrap;
+}
+
+.berea-payment-badge {
+	background: #ffffff;
+	border-radius: 6px;
+	padding: 5px 8px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 26px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.berea-payment-badge svg {
+	display: block;
+	color: #1a1f36;
+}
+
+.berea-amex-text {
+	font-family: Arial, sans-serif;
+	font-weight: 900;
+	font-size: 0.72rem;
+	color: #0070ba;
+	letter-spacing: -0.02em;
+}
+
+.berea-mp-text {
+	font-family: Arial, sans-serif;
+	font-weight: 800;
+	font-size: 0.64rem;
+	color: #009ee3;
+	letter-spacing: -0.01em;
+}
+
+/* Redes Sociales */
+.berea-footer-social {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.berea-social-link {
+	width: 36px;
+	height: 36px;
+	border-radius: var(--be-radius-full);
+	background: rgba(255, 255, 255, 0.08);
+	border: 1px solid rgba(255, 255, 255, 0.12);
+	color: #ffffff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.2s ease;
+}
+
+.berea-social-link svg {
+	width: 17px;
+	height: 17px;
+}
+
+.berea-social-link:hover {
+	background: var(--be-gold-500);
+	color: var(--be-navy-950);
+	border-color: var(--be-gold-400);
+	transform: translateY(-3px);
+	box-shadow: 0 4px 12px rgba(200, 152, 42, 0.35);
+}
+
+/* ----------------------------------
+   BLOQUE 3: Bottom (Copyright & Legal)
+   ---------------------------------- */
+.berea-footer__bottom {
+	background: #04070d;
+	padding: 22px 0;
+}
+
+.berea-footer-bottom__wrap {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	flex-wrap: wrap;
+}
+
+.berea-copyright {
+	margin: 0;
+	font-size: 0.84rem;
+	color: rgba(255, 255, 255, 0.55);
+}
+
+.berea-legal-links .berea-legal-nav {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	flex-wrap: wrap;
+}
+
+.berea-legal-links .berea-legal-nav li {
+	position: relative;
+}
+
+.berea-legal-links .berea-legal-nav li:not(:last-child)::after {
+	content: "|";
+	margin-left: 16px;
+	color: rgba(255, 255, 255, 0.2);
+}
+
+.berea-legal-links .berea-legal-nav a {
+	font-size: 0.8rem;
+	color: rgba(255, 255, 255, 0.55);
+	transition: color 0.2s ease;
+}
+
+.berea-legal-links .berea-legal-nav a:hover {
+	color: var(--be-gold-400);
+}
+
+/* --------------------------------------------------------------------------
+   6. RESPONSIVE BREAKPOINTS (TABLETS Y MÓVILES)
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 1100px) {
+	.berea-footer__grid {
+		grid-template-columns: 1fr 1fr 1fr;
+	}
+
+	.berea-footer__col--newsletter {
+		grid-column: 1 / -1;
+		max-width: 540px;
+		margin: 10px auto 0;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.berea-footer__top {
+		padding: 48px 0 40px;
+	}
+
+	.berea-footer__grid {
+		grid-template-columns: 1fr;
+		gap: 32px;
+	}
+
+	.berea-footer__col-title {
+		margin-bottom: 14px;
+	}
+
+	.berea-footer-middle__wrap {
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		gap: 20px;
+	}
+
+	.berea-footer-contact {
+		flex-direction: column;
+		text-align: center;
+	}
+
+	.berea-footer-bottom__wrap {
+		flex-direction: column;
+		text-align: center;
+		gap: 12px;
+	}
+
+	.berea-legal-links .berea-legal-nav {
+		justify-content: center;
+		gap: 10px;
+	}
+
+	.berea-legal-links .berea-legal-nav li:not(:last-child)::after {
+		margin-left: 10px;
+	}
+}
