@@ -601,64 +601,108 @@ body.berea-drawer-open {
 	align-items: start;
 }
 
-.berea-footer__col-title {
-	font-family: var(--be-font-serif);
-	font-size: 1.15rem;
-	color: #ffffff;
-	margin: 0 0 20px;
-	text-transform: uppercase;
-	letter-spacing: 0.05em;
-	position: relative;
-	padding-bottom: 12px;
+.berea-footer__col-title,
+#colophon .berea-footer__col-title,
+#colophon.berea-footer .berea-footer__col-title,
+.site-footer.berea-footer .berea-footer__col-title,
+.site-footer.berea-footer .berea-footer__col-title span,
+.site-footer.berea-footer .berea-footer__col h4,
+.site-footer.berea-footer .berea-footer__col h4 span {
+	font-family: var(--be-font-serif) !important;
+	font-size: 1.25rem !important;
+	color: #ffffff !important;
+	font-weight: 700 !important;
+	margin: 0 0 20px !important;
+	text-transform: uppercase !important;
+	letter-spacing: 0.06em !important;
+	position: relative !important;
+	padding-bottom: 12px !important;
+	display: inline-block !important;
+	text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6) !important;
 }
 
-.berea-footer__col-title::after {
-	content: "";
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	width: 32px;
-	height: 2px;
-	background: var(--be-gold-400);
+.berea-footer__col-title::after,
+#colophon .berea-footer__col-title::after,
+.site-footer.berea-footer .berea-footer__col-title::after {
+	content: "" !important;
+	position: absolute !important;
+	left: 0 !important;
+	bottom: 0 !important;
+	width: 42px !important;
+	height: 3px !important;
+	background: linear-gradient(90deg, #dfb14b, #c8982a) !important;
+	border-radius: 2px !important;
 }
 
-.berea-footer__nav-list {
-	list-style: none;
-	margin: 0;
-	padding: 0;
+.berea-footer__nav-list,
+#colophon .berea-footer__nav-list,
+.site-footer.berea-footer .berea-footer__nav-list,
+.site-footer.berea-footer .berea-footer__col ul,
+.site-footer.berea-footer ul.menu {
+	list-style: none !important;
+	margin: 0 !important;
+	padding: 0 !important;
 }
 
-.berea-footer__nav-list li {
-	margin-bottom: 12px;
+.berea-footer__nav-list li,
+#colophon .berea-footer__nav-list li,
+.site-footer.berea-footer .berea-footer__nav-list li,
+.site-footer.berea-footer .berea-footer__col ul li,
+.site-footer.berea-footer ul.menu li {
+	margin-bottom: 14px !important;
+	line-height: 1.5 !important;
 }
 
-.berea-footer__nav-list li a {
-	color: rgba(255, 255, 255, 0.72);
-	font-size: 0.92rem;
-	display: inline-flex;
-	align-items: center;
-	gap: 6px;
-	transition: all 0.2s ease;
+/* Enlaces con máxima legibilidad (anulación definitiva de .site-footer a de Storefront) */
+.berea-footer__nav-list li a,
+#colophon .berea-footer__nav-list li a,
+#colophon.site-footer .berea-footer__nav-list li a,
+.site-footer.berea-footer .berea-footer__nav-list li a,
+.site-footer.berea-footer .berea-footer__col ul li a,
+.site-footer.berea-footer .berea-footer__col a:not(.berea-newsletter-btn),
+.site-footer.berea-footer ul.menu li a {
+	color: #f8fafc !important; /* Blanco nítido y luminoso */
+	font-size: 1rem !important;
+	font-weight: 500 !important;
+	display: inline-flex !important;
+	align-items: center !important;
+	gap: 6px !important;
+	text-decoration: none !important;
+	transition: all 0.22s ease !important;
+	opacity: 0.98 !important;
 }
 
-.berea-footer__nav-list li a:hover {
-	color: var(--be-gold-300);
-	transform: translateX(4px);
+.berea-footer__nav-list li a:hover,
+#colophon .berea-footer__nav-list li a:hover,
+#colophon.site-footer .berea-footer__nav-list li a:hover,
+.site-footer.berea-footer .berea-footer__nav-list li a:hover,
+.site-footer.berea-footer .berea-footer__col ul li a:hover,
+.site-footer.berea-footer .berea-footer__col a:not(.berea-newsletter-btn):hover,
+.site-footer.berea-footer ul.menu li a:hover {
+	color: #ffd875 !important; /* Dorado luminoso en hover */
+	opacity: 1 !important;
+	transform: translateX(5px) !important;
+	text-shadow: 0 0 12px rgba(255, 216, 117, 0.45) !important;
 }
 
-.berea-highlight-link {
-	color: var(--be-gold-300) !important;
-	font-weight: 600;
+.berea-highlight-link,
+#colophon .berea-highlight-link,
+.site-footer.berea-footer .berea-highlight-link {
+	color: #ffd875 !important;
+	font-weight: 700 !important;
 }
 
-.berea-badge-pill {
-	font-size: 0.65rem;
-	background: var(--be-gold-500);
-	color: var(--be-navy-950);
-	padding: 2px 6px;
-	border-radius: var(--be-radius-full);
-	font-weight: 800;
-	text-transform: uppercase;
+.berea-badge-pill,
+.site-footer.berea-footer .berea-badge-pill {
+	font-size: 0.7rem !important;
+	background: linear-gradient(135deg, #dfb14b, #c8982a) !important;
+	color: #060b14 !important;
+	padding: 3px 8px !important;
+	border-radius: 9999px !important;
+	font-weight: 800 !important;
+	text-transform: uppercase !important;
+	letter-spacing: 0.04em !important;
+	box-shadow: 0 2px 8px rgba(200, 152, 42, 0.4) !important;
 }
 
 /* Tarjeta de Newsletter Blanca */
@@ -852,17 +896,22 @@ body.berea-drawer-open {
 	gap: 2px;
 }
 
-.berea-contact-phone {
-	display: inline-flex;
-	align-items: center;
-	gap: 6px;
-	font-size: 1.05rem;
-	font-weight: 700;
-	color: #ffffff;
+.berea-contact-phone,
+#colophon .berea-contact-phone,
+.site-footer.berea-footer .berea-contact-phone {
+	display: inline-flex !important;
+	align-items: center !important;
+	gap: 6px !important;
+	font-size: 1.05rem !important;
+	font-weight: 700 !important;
+	color: #ffffff !important;
+	text-decoration: none !important;
 }
 
-.berea-contact-phone:hover {
-	color: var(--be-gold-300);
+.berea-contact-phone:hover,
+#colophon .berea-contact-phone:hover,
+.site-footer.berea-footer .berea-contact-phone:hover {
+	color: #ffd875 !important;
 }
 
 .berea-contact-wa-icon {
@@ -871,13 +920,19 @@ body.berea-drawer-open {
 	color: #25D366;
 }
 
-.berea-contact-email {
-	font-size: 0.84rem;
-	color: rgba(255, 255, 255, 0.65);
+.berea-contact-email,
+#colophon .berea-contact-email,
+.site-footer.berea-footer .berea-contact-email {
+	font-size: 0.88rem !important;
+	color: #cbd5e1 !important;
+	text-decoration: none !important;
+	transition: color 0.2s ease !important;
 }
 
-.berea-contact-email:hover {
-	color: var(--be-gold-400);
+.berea-contact-email:hover,
+#colophon .berea-contact-email:hover,
+.site-footer.berea-footer .berea-contact-email:hover {
+	color: #ffd875 !important;
 }
 
 /* Métodos de Pago */
@@ -969,40 +1024,47 @@ body.berea-drawer-open {
 	flex-wrap: wrap;
 }
 
-.berea-copyright {
-	margin: 0;
-	font-size: 0.84rem;
-	color: rgba(255, 255, 255, 0.55);
+.berea-copyright,
+#colophon .berea-copyright,
+.site-footer.berea-footer .berea-copyright {
+	margin: 0 !important;
+	font-size: 0.88rem !important;
+	color: #cbd5e1 !important; /* Plata/Slate luminoso de alta legibilidad */
 }
 
 .berea-legal-links .berea-legal-nav {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	display: flex;
-	align-items: center;
-	gap: 16px;
-	flex-wrap: wrap;
+	list-style: none !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	display: flex !important;
+	align-items: center !important;
+	gap: 16px !important;
+	flex-wrap: wrap !important;
 }
 
 .berea-legal-links .berea-legal-nav li {
-	position: relative;
+	position: relative !important;
 }
 
 .berea-legal-links .berea-legal-nav li:not(:last-child)::after {
-	content: "|";
-	margin-left: 16px;
-	color: rgba(255, 255, 255, 0.2);
+	content: "|" !important;
+	margin-left: 16px !important;
+	color: rgba(255, 255, 255, 0.3) !important;
 }
 
-.berea-legal-links .berea-legal-nav a {
-	font-size: 0.8rem;
-	color: rgba(255, 255, 255, 0.55);
-	transition: color 0.2s ease;
+.berea-legal-links .berea-legal-nav a,
+#colophon .berea-legal-links .berea-legal-nav a,
+.site-footer.berea-footer .berea-legal-links .berea-legal-nav a {
+	font-size: 0.85rem !important;
+	color: #cbd5e1 !important; /* Gris claro nítido */
+	text-decoration: none !important;
+	transition: color 0.2s ease !important;
 }
 
-.berea-legal-links .berea-legal-nav a:hover {
-	color: var(--be-gold-400);
+.berea-legal-links .berea-legal-nav a:hover,
+#colophon .berea-legal-links .berea-legal-nav a:hover,
+.site-footer.berea-footer .berea-legal-links .berea-legal-nav a:hover {
+	color: #ffd875 !important;
 }
 
 /* --------------------------------------------------------------------------
