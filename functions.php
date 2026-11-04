@@ -83,6 +83,17 @@ require_once get_stylesheet_directory() . '/inc/checkout-policies.php';
 // Evitar que Storefront muestre el menú secundario duplicado en la cabecera.
 remove_action( 'storefront_header', 'storefront_secondary_navigation', 30 );
 
+/**
+ * Hide the Storefront breadcrumb only on the Nosotros page.
+ */
+function berea_hide_nosotros_breadcrumb() {
+	if ( is_page( 'nosotros' ) || is_page_template( 'page-nosotros.php' ) ) {
+		remove_action( 'storefront_before_content', 'woocommerce_breadcrumb', 10 );
+		remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20 );
+	}
+}
+add_action( 'wp', 'berea_hide_nosotros_breadcrumb', 20 );
+
 function berea_carrusel_scripts() {
     if ( is_front_page() ) {
         // Estilos de Swiper

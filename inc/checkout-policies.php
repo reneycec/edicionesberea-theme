@@ -8,20 +8,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Return the payment gateway IDs that represent an approved Berea credit account.
- *
- * Credit-card gateways are intentionally excluded: the policy applies to
- * customers with a separately approved account, not to card payments.
- *
- * @return string[]
- */
-function berea_credit_payment_method_ids() {
-	$payment_method_ids = apply_filters( 'berea_credit_payment_method_ids', array( 'berea_credit' ) );
-
-	return array_map( 'sanitize_key', (array) $payment_method_ids );
-}
-
-/**
  * Check whether the posted or currently selected shipping rates include delivery.
  *
  * @param array $data Checkout data.
@@ -49,18 +35,6 @@ function berea_checkout_requires_shipping_policy( $data = array() ) {
 	}
 
 	return false;
-}
-
-/**
- * Determine whether a credit-account policy acknowledgement applies.
- *
- * @param array $data Checkout data.
- * @return bool
- */
-function berea_checkout_requires_credit_policy( $data = array() ) {
-	$payment_method = isset( $data['payment_method'] ) ? sanitize_key( $data['payment_method'] ) : '';
-
-	return '' !== $payment_method && in_array( $payment_method, berea_credit_payment_method_ids(), true );
 }
 
 /**
@@ -109,28 +83,21 @@ function berea_render_checkout_policy_acknowledgements() {
 
 	$needs_shipping = WC()->cart->needs_shipping();
 	$shipping_required = berea_checkout_requires_shipping_policy();
-	$credit_required = berea_checkout_requires_credit_policy(
-		array(
-			'payment_method' => WC()->session ? WC()->session->get( 'chosen_payment_method', '' ) : '',
-		)
-	);
-
-	if ( ! $needs_shipping && ! $credit_required ) {
-		return;
-	}
 
 	$shipping_policy_url = home_url( '/politica-de-envios-cambios-devoluciones/' );
-	$credit_policy_url   = home_url( '/politica-de-credito-facturacion-y-pagos/' );
 	?>
 	<div class="berea-checkout-policy">
+		<?php
+		berea_render_checkout_policy_checkbox(
+			'berea_accept_changes_returns_policy',
+			$shipping_policy_url,
+			__( 'He leído y acepto las condiciones de cambios, devoluciones y reembolsos de Ediciones Berea.', 'berea' ),
+			true
+		);
+		?>
+
 		<?php if ( $needs_shipping ) : ?>
 			<?php
-			berea_render_checkout_policy_checkbox(
-				'berea_accept_changes_returns_policy',
-				$shipping_policy_url,
-				__( 'He leído y acepto las condiciones de cambios, devoluciones y reembolsos de Ediciones Berea.', 'berea' ),
-				true
-			);
 			berea_render_checkout_policy_checkbox(
 				'berea_accept_shipping_policy',
 				$shipping_policy_url,
@@ -141,15 +108,6 @@ function berea_render_checkout_policy_acknowledgements() {
 			?>
 		<?php endif; ?>
 
-		<?php
-		berea_render_checkout_policy_checkbox(
-			'berea_accept_credit_policy',
-			$credit_policy_url,
-			__( 'He leído y acepto la Política de Crédito, Facturación y Pagos. Entiendo que el crédito requiere una cuenta previamente aprobada.', 'berea' ),
-			$credit_required,
-			! $credit_required
-		);
-		?>
 	</div>
 	<?php
 }
@@ -165,7 +123,6 @@ function berea_add_policy_fields_to_checkout_data( $data ) {
 	$policy_fields = array(
 		'berea_accept_changes_returns_policy',
 		'berea_accept_shipping_policy',
-		'berea_accept_credit_policy',
 	);
 
 	foreach ( $policy_fields as $field_name ) {
@@ -184,7 +141,7 @@ add_filter( 'woocommerce_checkout_posted_data', 'berea_add_policy_fields_to_chec
  * @return void
  */
 function berea_validate_checkout_policy_acknowledgements( $data, $errors ) {
-	if ( function_exists( 'WC' ) && WC()->cart && WC()->cart->needs_shipping() && empty( $data['berea_accept_changes_returns_policy'] ) ) {
+	if ( function_exists( 'WC' ) && WC()->cart && ! WC()->cart->is_empty() && empty( $data['berea_accept_changes_returns_policy'] ) ) {
 		$errors->add(
 			'berea_changes_returns_policy_required',
 			__( 'Debes aceptar las condiciones de cambios, devoluciones y reembolsos para continuar.', 'berea' )
@@ -198,12 +155,6 @@ function berea_validate_checkout_policy_acknowledgements( $data, $errors ) {
 		);
 	}
 
-	if ( berea_checkout_requires_credit_policy( $data ) && empty( $data['berea_accept_credit_policy'] ) ) {
-		$errors->add(
-			'berea_credit_policy_required',
-			__( 'Debes aceptar la Política de Crédito, Facturación y Pagos para elegir esta opción.', 'berea' )
-		);
-	}
 }
 add_action( 'woocommerce_after_checkout_validation', 'berea_validate_checkout_policy_acknowledgements', 10, 2 );
 
@@ -217,7 +168,7 @@ add_action( 'woocommerce_after_checkout_validation', 'berea_validate_checkout_po
 function berea_store_checkout_policy_acknowledgements( $order, $data ) {
 	$accepted_at = current_time( 'mysql', true );
 
-	if ( ! empty( $data['berea_accept_changes_returns_policy'] ) && function_exists( 'WC' ) && WC()->cart && WC()->cart->needs_shipping() ) {
+	if ( ! empty( $data['berea_accept_changes_returns_policy'] ) && function_exists( 'WC' ) && WC()->cart && ! WC()->cart->is_empty() ) {
 		$order->update_meta_data( '_berea_changes_returns_policy_accepted_at', $accepted_at );
 	}
 
@@ -225,9 +176,6 @@ function berea_store_checkout_policy_acknowledgements( $order, $data ) {
 		$order->update_meta_data( '_berea_shipping_policy_accepted_at', $accepted_at );
 	}
 
-	if ( ! empty( $data['berea_accept_credit_policy'] ) && berea_checkout_requires_credit_policy( $data ) ) {
-		$order->update_meta_data( '_berea_credit_policy_accepted_at', $accepted_at );
-	}
 }
 add_action( 'woocommerce_checkout_create_order', 'berea_store_checkout_policy_acknowledgements', 10, 2 );
 
@@ -250,12 +198,5 @@ function berea_enqueue_checkout_policy_script() {
 		true
 	);
 
-	wp_localize_script(
-		'berea-checkout-policies',
-		'bereaCheckoutPolicies',
-		array(
-			'creditPaymentMethodIds' => berea_credit_payment_method_ids(),
-		)
-	);
 }
 add_action( 'wp_enqueue_scripts', 'berea_enqueue_checkout_policy_script', 20 );
