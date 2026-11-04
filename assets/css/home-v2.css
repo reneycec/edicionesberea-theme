@@ -467,6 +467,45 @@ body.berea-sticky-active.admin-bar #masthead {
     height: 40px;
     overflow: hidden;
 }
+.libro-autor {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-height: 0;
+    margin: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: max-height 0.25s ease, opacity 0.25s ease, transform 0.25s ease, margin 0.25s ease;
+}
+.libro-autor span {
+    color: #6b7280;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+.libro-autor strong {
+    display: inline-block;
+    color: #0b1326;
+    font-size: 14px;
+    line-height: 1.4;
+}
+.card-libro:hover .libro-autor,
+.card-libro:focus-within .libro-autor {
+    max-height: 4rem;
+    margin: 0 0 12px;
+    opacity: 1;
+    transform: translateY(0);
+}
+@media (hover: none) {
+    .libro-autor {
+        max-height: 4rem;
+        margin: 0 0 12px;
+        opacity: 1;
+        transform: none;
+    }
+}
 .libro-precio {
     display: block;
     font-size: 16px;

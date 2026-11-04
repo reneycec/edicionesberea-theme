@@ -22,6 +22,13 @@ $loop = new WP_Query( $args );
                     if ( ! $product ) {
                         continue;
                     }
+                    $author = '';
+                    foreach ( $product->get_attributes() as $attribute ) {
+                        if ( false !== stripos( wc_attribute_label( $attribute->get_name(), $product ), 'autor' ) ) {
+                            $author = trim( $product->get_attribute( $attribute->get_name() ) );
+                            break;
+                        }
+                    }
                 ?>
                     <div class="swiper-slide card-libro">
                         <div class="libro-portada">
@@ -33,6 +40,12 @@ $loop = new WP_Query( $args );
                         </div>
                         <div class="libro-info">
                             <h3 class="libro-titulo"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+                            <?php if ( '' !== $author ) : ?>
+                                <p class="libro-autor">
+                                    <span><?php esc_html_e( 'Autor', 'berea' ); ?></span>
+                                    <strong><?php echo esc_html( $author ); ?></strong>
+                                </p>
+                            <?php endif; ?>
                             <span class="libro-precio"><?php echo $product->get_price_html(); ?></span>
                             <a href="<?php echo esc_url( $product->add_to_cart_url() ); ?>" class="btn-comprar button">
                                 Añadir al carrito
