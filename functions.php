@@ -78,6 +78,7 @@ function berea_child_enqueue_styles() {
 require_once get_stylesheet_directory() . '/inc/custom-header.php';
 require_once get_stylesheet_directory() . '/inc/custom-footer.php';
 require_once get_stylesheet_directory() . '/inc/functions-home.php';
+require_once get_stylesheet_directory() . '/inc/checkout-policies.php';
 
 function berea_carrusel_scripts() {
     if ( is_front_page() ) {
