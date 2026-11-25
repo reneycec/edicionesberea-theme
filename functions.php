@@ -200,31 +200,6 @@ function berea_carrusel_scripts() {
                     });
                 });
 
-                document.querySelectorAll('.berea-home-event-gallery__slider').forEach(function (sliderEl) {
-                    if (sliderEl.querySelectorAll('.swiper-slide').length < 2) {
-                        return;
-                    }
-
-                    new Swiper(sliderEl, {
-                        slidesPerView: 1,
-                        spaceBetween: 20,
-                        rewind: true,
-                        autoplay: { delay: 4500, disableOnInteraction: false },
-                        pagination: {
-                            el: sliderEl.querySelector('.swiper-pagination'),
-                            clickable: true
-                        },
-                        navigation: {
-                            nextEl: sliderEl.querySelector('.swiper-button-next'),
-                            prevEl: sliderEl.querySelector('.swiper-button-prev')
-                        },
-                        breakpoints: {
-                            640: { slidesPerView: 2, spaceBetween: 20 },
-                            1024: { slidesPerView: 3, spaceBetween: 24 }
-                        }
-                    });
-                });
-
                 // Hero carrusel: solo si hay más de un slide configurado
                 var heroEl = document.querySelector('.libreria-hero--carrusel');
                 if ( heroEl ) {

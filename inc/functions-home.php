@@ -43,11 +43,16 @@ function berea_home_render_product_carousel( $category_name, $title, $subtitle =
 	?>
 	<section class="berea-carrusel-seccion berea-home-product-carousel">
 		<div class="berea-container">
-			<div class="seccion-header">
-				<h2><?php echo esc_html( $title ); ?></h2>
-				<?php if ( $subtitle ) : ?>
-					<p><?php echo esc_html( $subtitle ); ?></p>
-				<?php endif; ?>
+			<div class="seccion-header berea-home-product-carousel__header">
+				<div class="berea-home-product-carousel__heading">
+					<h2><?php echo esc_html( $title ); ?></h2>
+					<?php if ( $subtitle ) : ?>
+						<p><?php echo esc_html( $subtitle ); ?></p>
+					<?php endif; ?>
+				</div>
+				<a class="berea-home-product-carousel__catalog-link" href="<?php echo esc_url( get_term_link( $category ) ); ?>">
+					<?php esc_html_e( 'Ver el catálogo', 'berea' ); ?>
+				</a>
 			</div>
 
 			<div class="swiper berea-slider">
@@ -494,7 +499,7 @@ add_action( 'acf/init', function () {
 			),
 			array(
 				'key'           => 'field_promocion_imagen_1',
-				'label'         => 'Promoción — imagen 1',
+				'label'         => 'Ofertas y Promociones — Cupón',
 				'name'          => 'promocion_imagen_1',
 				'type'          => 'image',
 				'return_format' => 'url',
@@ -502,13 +507,13 @@ add_action( 'acf/init', function () {
 			),
 			array(
 				'key'           => 'field_promocion_url_1',
-				'label'         => 'Promoción — enlace 1 (opcional)',
+				'label'         => 'Cupón — enlace (opcional)',
 				'name'          => 'promocion_url_1',
 				'type'          => 'url',
 			),
 			array(
 				'key'           => 'field_promocion_imagen_2',
-				'label'         => 'Promoción — imagen 2',
+				'label'         => 'Ofertas y Promociones — Oferta especial',
 				'name'          => 'promocion_imagen_2',
 				'type'          => 'image',
 				'return_format' => 'url',
@@ -516,8 +521,41 @@ add_action( 'acf/init', function () {
 			),
 			array(
 				'key'           => 'field_promocion_url_2',
-				'label'         => 'Promoción — enlace 2 (opcional)',
+				'label'         => 'Oferta especial — enlace (opcional)',
 				'name'          => 'promocion_url_2',
+				'type'          => 'url',
+			),
+			array(
+				'key'   => 'field_eventos_banners_tab',
+				'label' => 'Eventos y Seminarios',
+				'type'  => 'tab',
+			),
+			array(
+				'key'           => 'field_evento_imagen_1',
+				'label'         => 'Eventos y Seminarios — Cupón',
+				'name'          => 'evento_imagen_1',
+				'type'          => 'image',
+				'return_format' => 'url',
+				'preview_size'  => 'medium',
+			),
+			array(
+				'key'           => 'field_evento_url_1',
+				'label'         => 'Cupón — enlace (opcional)',
+				'name'          => 'evento_url_1',
+				'type'          => 'url',
+			),
+			array(
+				'key'           => 'field_evento_imagen_2',
+				'label'         => 'Eventos y Seminarios — Evento especial',
+				'name'          => 'evento_imagen_2',
+				'type'          => 'image',
+				'return_format' => 'url',
+				'preview_size'  => 'medium',
+			),
+			array(
+				'key'           => 'field_evento_url_2',
+				'label'         => 'Evento especial — enlace (opcional)',
+				'name'          => 'evento_url_2',
 				'type'          => 'url',
 			),
 			array(
