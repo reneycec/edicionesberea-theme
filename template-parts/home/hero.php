@@ -12,16 +12,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$url_tienda = function_exists( 'wc_get_page_id' )
-	? get_permalink( wc_get_page_id( 'shop' ) )
-	: home_url( '/' );
-
 // Construir los slides: el primero siempre existe y los demás requieren imagen.
 $slides = array(
 	array(
-		'imagen'      => berea_home_get_field( 'hero_imagen' ) ?: get_stylesheet_directory_uri() . '/assets/img/hero-default.jpg',
-		'boton_texto' => berea_home_get_field( 'hero_boton_texto' ) ?: 'Ver catálogo',
-		'boton_url'   => berea_home_get_field( 'hero_boton_url' ) ?: $url_tienda,
+		'imagen' => berea_home_get_field( 'hero_imagen' ) ?: get_stylesheet_directory_uri() . '/assets/img/hero-default.jpg',
 	),
 );
 
@@ -33,9 +27,7 @@ foreach ( array( 2, 3 ) as $n ) {
 	}
 
 	$slides[] = array(
-		'imagen'      => $imagen,
-		'boton_texto' => berea_home_get_field( "hero{$n}_boton_texto" ) ?: $slides[0]['boton_texto'],
-		'boton_url'   => berea_home_get_field( "hero{$n}_boton_url" ) ?: $slides[0]['boton_url'],
+		'imagen' => $imagen,
 	);
 }
 
@@ -54,34 +46,12 @@ add_action( 'wp_head', function () use ( $slides ) {
 		<div class="swiper-wrapper">
 			<?php foreach ( $slides as $slide ) : ?>
 				<div class="swiper-slide libreria-hero__slide" style="background-image:url('<?php echo esc_url( $slide['imagen'] ); ?>');">
-					<div class="libreria-hero__overlay">
-						<div class="libreria-hero__contenido">
-							<a class="libreria-hero__boton button" href="<?php echo esc_url( $slide['boton_url'] ); ?>">
-								<?php echo esc_html( $slide['boton_texto'] ); ?>
-							</a>
-							<?php if ( shortcode_exists( 'fibosearch' ) ) : ?>
-								<div class="libreria-hero__buscador">
-									<?php echo do_shortcode( '[fibosearch]' ); ?>
-								</div>
-							<?php endif; ?>
-						</div>
-					</div>
+					<div class="libreria-hero__overlay"></div>
 				</div>
 			<?php endforeach; ?>
 		</div>
 		<div class="swiper-pagination libreria-hero__paginacion"></div>
 	<?php else : ?>
-		<div class="libreria-hero__overlay">
-			<div class="libreria-hero__contenido">
-				<a class="libreria-hero__boton button" href="<?php echo esc_url( $slides[0]['boton_url'] ); ?>">
-					<?php echo esc_html( $slides[0]['boton_texto'] ); ?>
-				</a>
-				<?php if ( shortcode_exists( 'fibosearch' ) ) : ?>
-					<div class="libreria-hero__buscador">
-						<?php echo do_shortcode( '[fibosearch]' ); ?>
-					</div>
-				<?php endif; ?>
-			</div>
-		</div>
+		<div class="libreria-hero__overlay"></div>
 	<?php endif; ?>
 </section>
