@@ -21,6 +21,83 @@ function berea_home_get_field( $field_name, $post_id = false ) {
 	return get_field( $field_name, $post_id );
 }
 
+function berea_home_render_product_carousel( $category_name, $title, $subtitle = '' ) {
+	if ( ! function_exists( 'wc_get_products' ) ) {
+		return;
+	}
+
+	$category = get_term_by( 'name', $category_name, 'product_cat' );
+	if ( ! $category || is_wp_error( $category ) ) {
+		return;
+	}
+
+	$products = wc_get_products( array(
+		'status'   => 'publish',
+		'limit'    => 8,
+		'category' => array( $category->slug ),
+	) );
+
+	if ( empty( $products ) ) {
+		return;
+	}
+	?>
+	<section class="berea-carrusel-seccion berea-home-product-carousel">
+		<div class="berea-container">
+			<div class="seccion-header">
+				<h2><?php echo esc_html( $title ); ?></h2>
+				<?php if ( $subtitle ) : ?>
+					<p><?php echo esc_html( $subtitle ); ?></p>
+				<?php endif; ?>
+			</div>
+
+			<div class="swiper berea-slider">
+				<div class="swiper-wrapper">
+					<?php foreach ( $products as $product ) :
+						$GLOBALS['product'] = $product;
+						$GLOBALS['post']    = get_post( $product->get_id() );
+						setup_postdata( $GLOBALS['post'] );
+
+						$author = '';
+						foreach ( $product->get_attributes() as $attribute ) {
+							if ( false !== stripos( wc_attribute_label( $attribute->get_name(), $product ), 'autor' ) ) {
+								$author = trim( $product->get_attribute( $attribute->get_name() ) );
+								break;
+							}
+						}
+						?>
+						<div class="swiper-slide card-libro">
+							<div class="libro-portada">
+								<a href="<?php echo esc_url( $product->get_permalink() ); ?>">
+									<?php echo wp_kses_post( $product->get_image( 'woocommerce_thumbnail' ) ); ?>
+								</a>
+							</div>
+							<div class="libro-info">
+								<h3 class="libro-titulo">
+									<a href="<?php echo esc_url( $product->get_permalink() ); ?>"><?php echo esc_html( $product->get_name() ); ?></a>
+								</h3>
+								<?php if ( '' !== $author ) : ?>
+									<p class="libro-autor">
+										<span><?php esc_html_e( 'Autor', 'berea' ); ?></span>
+										<strong><?php echo esc_html( $author ); ?></strong>
+									</p>
+								<?php endif; ?>
+								<span class="libro-precio"><?php echo wp_kses_post( $product->get_price_html() ); ?></span>
+								<a href="<?php echo esc_url( $product->add_to_cart_url() ); ?>" class="btn-comprar button">
+									<?php echo esc_html( $product->add_to_cart_text() ); ?>
+								</a>
+							</div>
+						</div>
+					<?php endforeach; wp_reset_postdata(); ?>
+				</div>
+				<div class="swiper-pagination"></div>
+				<div class="swiper-button-prev"></div>
+				<div class="swiper-button-next"></div>
+			</div>
+		</div>
+	</section>
+	<?php
+}
+
 /* -------------------------------------------------------------------------
  * 1. ASSETS DEL HOME
  * -----------------------------------------------------------------------*/
@@ -74,6 +151,130 @@ add_action( 'init', function () {
 		'has_archive'   => false,
 	) );
 } );
+
+add_action( 'init', function () {
+	register_post_type( 'berea_home_event', array(
+		'labels' => array(
+			'name'               => 'Eventos de portada',
+			'singular_name'      => 'Evento de portada',
+			'add_new_item'       => 'Agregar evento',
+			'edit_item'          => 'Editar evento',
+			'new_item'           => 'Nuevo evento',
+			'view_item'          => 'Ver evento',
+			'search_items'       => 'Buscar eventos',
+			'not_found'          => 'No se encontraron eventos',
+			'not_found_in_trash' => 'No hay eventos en la papelera',
+			'menu_name'          => 'Eventos de portada',
+		),
+		'public'       => false,
+		'show_ui'      => true,
+		'show_in_rest' => true,
+		'menu_icon'    => 'dashicons-calendar-alt',
+		'supports'     => array( 'title', 'editor', 'thumbnail' ),
+	) );
+} );
+
+add_action( 'add_meta_boxes_berea_home_event', function () {
+	add_meta_box(
+		'berea-home-event-dates',
+		'Vigencia en la portada',
+		'berea_home_event_dates_metabox',
+		'berea_home_event',
+		'side'
+	);
+} );
+
+function berea_home_event_dates_metabox( $post ) {
+	wp_nonce_field( 'berea_home_event_dates', 'berea_home_event_dates_nonce' );
+	$start_date = get_post_meta( $post->ID, '_berea_home_event_start', true );
+	$end_date   = get_post_meta( $post->ID, '_berea_home_event_end', true );
+	?>
+	<p>El evento aparecerá en la portada entre estas fechas.</p>
+	<p>
+		<label for="berea-home-event-start">Mostrar desde</label>
+		<input id="berea-home-event-start" name="berea_home_event_start" type="date" value="<?php echo esc_attr( $start_date ? date( 'Y-m-d', strtotime( $start_date ) ) : '' ); ?>" required>
+	</p>
+	<p>
+		<label for="berea-home-event-end">Mostrar hasta</label>
+		<input id="berea-home-event-end" name="berea_home_event_end" type="date" value="<?php echo esc_attr( $end_date ? date( 'Y-m-d', strtotime( $end_date ) ) : '' ); ?>" required>
+	</p>
+	<p>Usa la imagen destacada como banner horizontal y agrega un bloque Galería al contenido para las fotos del carrusel.</p>
+	<?php
+}
+
+add_action( 'save_post_berea_home_event', 'berea_home_save_event_dates', 10, 3 );
+function berea_home_save_event_dates( $post_id, $post, $update ) {
+	if ( ! isset( $_POST['berea_home_event_dates_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['berea_home_event_dates_nonce'] ) ), 'berea_home_event_dates' ) ) {
+		return;
+	}
+	if ( ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) || wp_is_post_revision( $post_id ) || ! current_user_can( 'edit_post', $post_id ) ) {
+		return;
+	}
+
+	$dates = array(
+		'berea_home_event_start' => '_berea_home_event_start',
+		'berea_home_event_end'   => '_berea_home_event_end',
+	);
+
+	foreach ( $dates as $field => $meta_key ) {
+		$value = isset( $_POST[ $field ] ) ? sanitize_text_field( wp_unslash( $_POST[ $field ] ) ) : '';
+		$date  = DateTime::createFromFormat( '!Y-m-d', $value, wp_timezone() );
+
+		if ( $date && $date->format( 'Y-m-d' ) === $value ) {
+			update_post_meta( $post_id, $meta_key, $date->format( 'Ymd' ) );
+		} else {
+			delete_post_meta( $post_id, $meta_key );
+		}
+	}
+}
+
+function berea_home_get_active_events() {
+	$today = current_time( 'Ymd' );
+
+	return get_posts( array(
+		'post_type'      => 'berea_home_event',
+		'post_status'    => 'publish',
+		'posts_per_page' => 20,
+		'meta_key'       => '_berea_home_event_start',
+		'orderby'        => 'meta_value_num',
+		'order'          => 'ASC',
+		'meta_query'     => array(
+			'relation' => 'AND',
+			array(
+				'key'     => '_berea_home_event_start',
+				'value'   => $today,
+				'compare' => '<=',
+				'type'    => 'NUMERIC',
+			),
+			array(
+				'key'     => '_berea_home_event_end',
+				'value'   => $today,
+				'compare' => '>=',
+				'type'    => 'NUMERIC',
+			),
+		),
+	) );
+}
+
+function berea_home_get_event_gallery_image_ids( $blocks, $inside_gallery = false ) {
+	$image_ids = array();
+
+	foreach ( $blocks as $block ) {
+		$is_gallery = $inside_gallery || 'core/gallery' === $block['blockName'];
+
+		if ( 'core/gallery' === $block['blockName'] && ! empty( $block['attrs']['ids'] ) ) {
+			$image_ids = array_merge( $image_ids, array_map( 'absint', $block['attrs']['ids'] ) );
+		}
+		if ( $is_gallery && 'core/image' === $block['blockName'] && ! empty( $block['attrs']['id'] ) ) {
+			$image_ids[] = absint( $block['attrs']['id'] );
+		}
+		if ( ! empty( $block['innerBlocks'] ) ) {
+			$image_ids = array_merge( $image_ids, berea_home_get_event_gallery_image_ids( $block['innerBlocks'], $is_gallery ) );
+		}
+	}
+
+	return array_values( array_unique( array_filter( $image_ids ) ) );
+}
 
 /* -------------------------------------------------------------------------
  * 3. TAXONOMÍA: EDITORIAL (autores / casas editoriales)
@@ -285,6 +486,39 @@ add_action( 'acf/init', function () {
 				'field_type'    => 'checkbox',
 				'return_format' => 'object',
 				'add_term'      => 1,
+			),
+			array(
+				'key'   => 'field_promociones_tab',
+				'label' => 'Ofertas y Promociones',
+				'type'  => 'tab',
+			),
+			array(
+				'key'           => 'field_promocion_imagen_1',
+				'label'         => 'Promoción — imagen 1',
+				'name'          => 'promocion_imagen_1',
+				'type'          => 'image',
+				'return_format' => 'url',
+				'preview_size'  => 'medium',
+			),
+			array(
+				'key'           => 'field_promocion_url_1',
+				'label'         => 'Promoción — enlace 1 (opcional)',
+				'name'          => 'promocion_url_1',
+				'type'          => 'url',
+			),
+			array(
+				'key'           => 'field_promocion_imagen_2',
+				'label'         => 'Promoción — imagen 2',
+				'name'          => 'promocion_imagen_2',
+				'type'          => 'image',
+				'return_format' => 'url',
+				'preview_size'  => 'medium',
+			),
+			array(
+				'key'           => 'field_promocion_url_2',
+				'label'         => 'Promoción — enlace 2 (opcional)',
+				'name'          => 'promocion_url_2',
+				'type'          => 'url',
 			),
 			array(
 				'key'   => 'field_newsletter_tab',

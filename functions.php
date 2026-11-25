@@ -83,6 +83,25 @@ require_once get_stylesheet_directory() . '/inc/checkout-policies.php';
 // Evitar que Storefront muestre el menú secundario duplicado en la cabecera.
 remove_action( 'storefront_header', 'storefront_secondary_navigation', 30 );
 
+// Ocultar estos widgets de WordPress en todas las barras laterales del sitio.
+add_filter( 'widget_display_callback', 'berea_hide_unwanted_sidebar_widgets', 10, 3 );
+function berea_hide_unwanted_sidebar_widgets( $instance, $widget, $args ) {
+	$widget_classes = array(
+		'WP_Widget_Recent_Posts',
+		'WP_Widget_Recent_Comments',
+		'WP_Widget_Archives',
+		'WP_Widget_Categories',
+	);
+
+	foreach ( $widget_classes as $widget_class ) {
+		if ( is_a( $widget, $widget_class ) ) {
+			return false;
+		}
+	}
+
+	return $instance;
+}
+
 /**
  * Hide the Storefront breadcrumb only on the Nosotros page.
  */
@@ -103,17 +122,67 @@ function berea_carrusel_scripts() {
         // Inicialización
         wp_add_inline_script( 'swiper-js', "
             document.addEventListener('DOMContentLoaded', function () {
-                var swiper = new Swiper('.berea-slider', {
-                    slidesPerView: 1,
-                    spaceBetween: 20,
-                    loop: true,
-                    autoplay: { delay: 4500, disableOnInteraction: false },
-                    pagination: { el: '.swiper-pagination', clickable: true },
-                    navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-                    breakpoints: {
-                        640: { slidesPerView: 2, spaceBetween: 20 },
-                        1024: { slidesPerView: 4, spaceBetween: 25 }
+                document.querySelectorAll('.berea-slider').forEach(function (sliderEl) {
+                    new Swiper(sliderEl, {
+                        slidesPerView: 1,
+                        spaceBetween: 20,
+                        rewind: true,
+                        autoplay: { delay: 4500, disableOnInteraction: false },
+                        pagination: {
+                            el: sliderEl.querySelector('.swiper-pagination'),
+                            clickable: true
+                        },
+                        navigation: {
+                            nextEl: sliderEl.querySelector('.swiper-button-next'),
+                            prevEl: sliderEl.querySelector('.swiper-button-prev')
+                        },
+                        breakpoints: {
+                            640: { slidesPerView: 2, spaceBetween: 20 },
+                            1024: { slidesPerView: 4, spaceBetween: 25 }
+                        }
+                    });
+                });
+
+                document.querySelectorAll('.berea-home-event-banners__slider').forEach(function (sliderEl) {
+                    if (sliderEl.querySelectorAll('.swiper-slide').length < 2) {
+                        return;
                     }
+
+                    new Swiper(sliderEl, {
+                        slidesPerView: 1,
+                        loop: true,
+                        speed: 700,
+                        autoplay: { delay: 6000, disableOnInteraction: false },
+                        pagination: {
+                            el: sliderEl.querySelector('.swiper-pagination'),
+                            clickable: true
+                        }
+                    });
+                });
+
+                document.querySelectorAll('.berea-home-event-gallery__slider').forEach(function (sliderEl) {
+                    if (sliderEl.querySelectorAll('.swiper-slide').length < 2) {
+                        return;
+                    }
+
+                    new Swiper(sliderEl, {
+                        slidesPerView: 1,
+                        spaceBetween: 20,
+                        rewind: true,
+                        autoplay: { delay: 4500, disableOnInteraction: false },
+                        pagination: {
+                            el: sliderEl.querySelector('.swiper-pagination'),
+                            clickable: true
+                        },
+                        navigation: {
+                            nextEl: sliderEl.querySelector('.swiper-button-next'),
+                            prevEl: sliderEl.querySelector('.swiper-button-prev')
+                        },
+                        breakpoints: {
+                            640: { slidesPerView: 2, spaceBetween: 20 },
+                            1024: { slidesPerView: 3, spaceBetween: 24 }
+                        }
+                    });
                 });
 
                 // Hero carrusel: solo si hay más de un slide configurado
@@ -125,7 +194,10 @@ function berea_carrusel_scripts() {
                         loop: true,
                         speed: 900,
                         autoplay: { delay: 6000, disableOnInteraction: false },
-                        pagination: { el: '.libreria-hero__paginacion', clickable: true }
+                        pagination: {
+                            el: heroEl.querySelector('.libreria-hero__paginacion'),
+                            clickable: true
+                        }
                     });
                 }
             });

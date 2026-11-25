@@ -325,6 +325,81 @@
 	font-size: 0.9rem;
 }
 
+.berea-home-promo-banners__grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 20px;
+}
+
+.berea-home-promo-banners__item {
+	display: block;
+	overflow: hidden;
+	border-radius: 8px;
+	background: #f3f4f6;
+	aspect-ratio: 2.4 / 1;
+}
+
+.berea-home-promo-banners__item img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: transform 0.3s ease;
+}
+
+.berea-home-promo-banners__item:hover img {
+	transform: scale(1.03);
+}
+
+.berea-home-event-banners__slide img {
+	display: block;
+	width: 100%;
+	height: auto;
+	max-height: 440px;
+	object-fit: cover;
+}
+
+.berea-home-event-gallery__slide {
+	height: auto;
+	text-align: center;
+}
+
+.berea-home-event-gallery__slide img {
+	width: 100%;
+	height: 280px;
+	object-fit: cover;
+	border-radius: 8px;
+}
+
+.berea-home-event-gallery__slide p {
+	margin: 10px 0 0;
+	font-weight: 600;
+}
+
+.berea-home-event-gallery__slider .swiper-button-prev,
+.berea-home-event-gallery__slider .swiper-button-next {
+	color: #1f2937;
+}
+
+@media screen and (max-width: 640px) {
+	.berea-home-promo-banners__grid {
+		grid-template-columns: 1fr;
+		gap: 14px;
+	}
+
+	.berea-home-promo-banners__item {
+		aspect-ratio: 2 / 1;
+	}
+
+	.berea-home-event-banners__slide img {
+		aspect-ratio: 2 / 1;
+	}
+
+	.berea-home-event-gallery__slide img {
+		height: 240px;
+	}
+}
+
 /* ==========================================================================
    Menú sticky (header fijo al hacer scroll)
    La clase .berea-sticky-active la agrega/quita el JS en functions-home.php
