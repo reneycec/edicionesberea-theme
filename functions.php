@@ -85,6 +85,28 @@ remove_action( 'storefront_header', 'storefront_secondary_navigation', 30 );
 
 // Ocultar estos widgets de WordPress en todas las barras laterales del sitio.
 add_filter( 'widget_display_callback', 'berea_hide_unwanted_sidebar_widgets', 10, 3 );
+add_filter( 'get_product_search_form', 'berea_customize_product_search_placeholder' );
+
+function berea_sidebar_has_unwanted_block( $blocks ) {
+	$unwanted_blocks = array(
+		'core/latest-posts',
+		'core/latest-comments',
+		'core/archives',
+		'core/categories',
+	);
+
+	foreach ( $blocks as $block ) {
+		if ( in_array( $block['blockName'], $unwanted_blocks, true ) ) {
+			return true;
+		}
+		if ( ! empty( $block['innerBlocks'] ) && berea_sidebar_has_unwanted_block( $block['innerBlocks'] ) ) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
 function berea_hide_unwanted_sidebar_widgets( $instance, $widget, $args ) {
 	$widget_classes = array(
 		'WP_Widget_Recent_Posts',
@@ -99,7 +121,25 @@ function berea_hide_unwanted_sidebar_widgets( $instance, $widget, $args ) {
 		}
 	}
 
+	if ( is_a( $widget, 'WP_Widget_Block' ) && ! empty( $instance['content'] ) ) {
+		$blocks = parse_blocks( $instance['content'] );
+		if ( berea_sidebar_has_unwanted_block( $blocks ) ) {
+			return false;
+		}
+	}
+
 	return $instance;
+}
+
+function berea_customize_product_search_placeholder( $form ) {
+	return preg_replace_callback(
+		'/(<input\b[^>]*\bclass="[^"]*\bsearch-field\b[^"]*"[^>]*\bplaceholder=")[^"]*(")/i',
+		function ( $matches ) {
+			return $matches[1] . esc_attr__( 'Título, autor o editorial', 'berea' ) . $matches[2];
+		},
+		$form,
+		1
+	);
 }
 
 /**
