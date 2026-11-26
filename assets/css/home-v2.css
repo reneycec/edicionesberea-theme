@@ -364,6 +364,11 @@
 	gap: 20px;
 }
 
+.berea-home-promo-banners .berea-home-image-banners__grid {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+}
+
 .berea-home-image-banners__item {
 	flex: 0 1 calc(50% - 10px);
 	max-width: 560px;
@@ -374,12 +379,22 @@
 	aspect-ratio: 2.4 / 1;
 }
 
+.berea-home-promo-banners .berea-home-image-banners__item {
+	max-width: none;
+	aspect-ratio: auto;
+}
+
 .berea-home-image-banners__item img {
 	display: block;
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
 	transition: transform 0.3s ease;
+}
+
+.berea-home-promo-banners .berea-home-image-banners__item img {
+	height: auto;
+	object-fit: contain;
 }
 
 .berea-home-image-banners__item:hover img {
@@ -397,8 +412,10 @@
 }
 
 .berea-home-event-gallery__item img {
+	display: block;
 	width: 100%;
-	height: 280px;
+	height: auto;
+	aspect-ratio: 8 / 5;
 	object-fit: cover;
 	border-radius: 8px;
 }
@@ -422,18 +439,23 @@
 		gap: 14px;
 	}
 
+	.berea-home-promo-banners .berea-home-image-banners__grid {
+		grid-template-columns: 1fr;
+	}
+
 	.berea-home-image-banners__item {
 		flex-basis: 100%;
 		aspect-ratio: 2 / 1;
+	}
+
+	.berea-home-promo-banners .berea-home-image-banners__item {
+		aspect-ratio: auto;
 	}
 
 	.berea-home-event-gallery__grid {
 		grid-template-columns: 1fr;
 	}
 
-	.berea-home-event-gallery__item img {
-		height: 240px;
-	}
 }
 
 body.woocommerce.archive #primary.content-area {
