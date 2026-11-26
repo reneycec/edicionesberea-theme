@@ -45,7 +45,9 @@ function berea_home_render_product_carousel( $category_name, $title, $subtitle =
 		<div class="berea-container">
 			<div class="seccion-header berea-home-product-carousel__header">
 				<div class="berea-home-product-carousel__heading">
-					<h2><?php echo esc_html( $title ); ?></h2>
+					<?php if ( $title ) : ?>
+						<h2><?php echo esc_html( $title ); ?></h2>
+					<?php endif; ?>
 					<?php if ( $subtitle ) : ?>
 						<p><?php echo esc_html( $subtitle ); ?></p>
 					<?php endif; ?>

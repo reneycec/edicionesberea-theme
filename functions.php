@@ -89,6 +89,7 @@ add_filter( 'get_product_search_form', 'berea_customize_product_search_placehold
 
 function berea_sidebar_has_unwanted_block( $blocks ) {
 	$unwanted_blocks = array(
+		'core/search',
 		'core/latest-posts',
 		'core/latest-comments',
 		'core/archives',
@@ -113,6 +114,8 @@ function berea_hide_unwanted_sidebar_widgets( $instance, $widget, $args ) {
 		'WP_Widget_Recent_Comments',
 		'WP_Widget_Archives',
 		'WP_Widget_Categories',
+		'WP_Widget_Search',
+		'WC_Widget_Product_Search',
 	);
 
 	foreach ( $widget_classes as $widget_class ) {
@@ -129,6 +132,11 @@ function berea_hide_unwanted_sidebar_widgets( $instance, $widget, $args ) {
 	}
 
 	return $instance;
+}
+
+add_filter( 'loop_shop_columns', 'berea_shop_loop_columns' );
+function berea_shop_loop_columns() {
+	return 4;
 }
 
 function berea_customize_product_search_placeholder( $form ) {

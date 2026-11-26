@@ -337,6 +337,15 @@
 	margin-bottom: 0;
 }
 
+.berea-home-product-carousel__heading h2,
+.berea-home-promo-banners .libreria-section__titulo {
+	font-family: var(--be-font-serif);
+	font-size: clamp(1.85rem, 3.2vw, 2.4rem);
+	font-weight: 700;
+	line-height: 1.2;
+	text-align: left;
+}
+
 .berea-home-product-carousel__heading p {
 	margin: 8px 0 0;
 }
@@ -346,10 +355,6 @@
 	font-size: 0.85rem;
 	font-weight: 700;
 	text-transform: uppercase;
-}
-
-.berea-home-image-banners .libreria-section__titulo {
-	text-align: left;
 }
 
 .berea-home-image-banners__grid {
@@ -408,6 +413,11 @@
 		align-items: flex-start;
 	}
 
+	.berea-home-product-carousel__heading h2,
+	.berea-home-promo-banners .libreria-section__titulo {
+		font-size: 1.7rem;
+	}
+
 	.berea-home-image-banners__grid {
 		gap: 14px;
 	}
@@ -424,6 +434,16 @@
 	.berea-home-event-gallery__item img {
 		height: 240px;
 	}
+}
+
+body.woocommerce.archive #primary.content-area {
+	float: none;
+	width: 100%;
+	margin-right: 0;
+}
+
+body.woocommerce.archive #secondary.widget-area {
+	display: none;
 }
 
 /* ==========================================================================
